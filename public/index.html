@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>W - 廖嘉逸</title>
+  <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+  <script src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?f338e6e48171cfc763820c8cbdff7286";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url()">
+        <div class='av-pic' style="background-image: url(/assets/avatar.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>W - 廖嘉逸</div>
+        
+            <div>Liao Jiayi</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/about/" class="Btn">
+              <li>About</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+            
+                <a href="https://github.com/buptljy">
+                    <img src="/assets/github.svg" />
+                </a>
+            
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2018/04/11/hs-err-pid-log里是些什么？/">hs_err_pid.log里是些什么？</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2018-04-11T12:28:03.000Z" itemprop="datePublished">
+    2018-04-11
+  </time>
+  
+  | 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/tags/memory/">memory</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/tags/linux/">linux</a> }
+  </li>
+
+
+  </ul>
+  
+  
+</div>
+
+    </header>
+    <div>
+      
+        <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> There is insufficient memory <span class="keyword">for</span> the Java Runtime Environment to <span class="built_in">continue</span>.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Native memory allocation (mmap) failed to map 12288 bytes <span class="keyword">for</span> committing reserved memory.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Possible reasons:</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   The system is out of physical RAM or swap space</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   In 32 bit mode, the process size <span class="built_in">limit</span> was hit</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Possible solutions:</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   Reduce memory load on the system</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   Increase physical memory or swap space</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   Check <span class="keyword">if</span> swap backing store is full</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   Use 64 bit Java on a 64 bit OS</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   Decrease Java heap size (-Xmx/-Xms)</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   Decrease number of Java threads</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   Decrease Java thread stack sizes (-Xss)</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   Set larger code cache with -XX:ReservedCodeCacheSize=</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> This output file may be truncated or incomplete.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="meta">#</span><span class="bash">  Out of Memory Error (os_linux.cpp:2673), pid=13016, tid=140682742126336</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> JRE version: Java(TM) SE Runtime Environment (8.0_40-b25) (build 1.8.0_40-b25)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Java VM: Java HotSpot(TM) 64-Bit Server VM (25.40-b25 mixed mode linux-amd64 compressed oops)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Failed to write core dump. Core dumps have been disabled. To <span class="built_in">enable</span> core dumping, try <span class="string">"ulimit -c unlimited"</span> before starting Java again</span></span><br></pre></td></tr></table></figure>
+<p>第一部分主要是程序crash的原因以及相关的solution。<br><figure class="highlight x86asm"><table><tr><td class="code"><pre><span class="line">Current thread (<span class="number">0x00007ff2d8001000</span>):  JavaThread <span class="string">"flink-akka.remote.default-remote-dispatcher-15"</span> daemon [_thread_new, id=<span class="number">31925</span>, stack(<span class="number">0x00007ff340ced000</span>,<span class="number">0x00007ff340dee000</span>)]</span><br><span class="line"></span><br><span class="line"><span class="symbol">Stack:</span> [<span class="number">0x00007ff340ced000</span>,<span class="number">0x00007ff340dee000</span>],  <span class="built_in">sp</span>=<span class="number">0x00007ff340dec9a0</span>,  free space=1022k</span><br><span class="line">Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)</span><br><span class="line">V  [libjvm.so+<span class="number">0xaaca9a</span>]  VMError::report_and_die()+<span class="number">0x2ba</span></span><br><span class="line">V  [libjvm.so+<span class="number">0x4f333b</span>]  report_vm_out_of_memory(char const*, <span class="keyword">int</span>, unsigned long, VMErrorType, char const*)+<span class="number">0x8b</span></span><br><span class="line">V  [libjvm.so+<span class="number">0x90e8c3</span>]  os::Linux::commit_memory_impl(char*, unsigned long, bool)+<span class="number">0x103</span></span><br><span class="line">V  [libjvm.so+<span class="number">0x90e98c</span>]  os::pd_commit_memory(char*, unsigned long, bool)+<span class="number">0xc</span></span><br><span class="line">V  [libjvm.so+<span class="number">0x90772a</span>]  os::commit_memory(char*, unsigned long, bool)+<span class="number">0x2a</span></span><br><span class="line">V  [libjvm.so+<span class="number">0x90c97f</span>]  os::pd_create_stack_guard_pages(char*, unsigned long)+<span class="number">0x7f</span></span><br><span class="line">V  [libjvm.so+<span class="number">0xa52b4e</span>]  JavaThread::create_stack_guard_pages()+<span class="number">0x5e</span></span><br><span class="line">V  [libjvm.so+<span class="number">0xa5c9b4</span>]  JavaThread::run()+<span class="number">0x34</span></span><br><span class="line">V  [libjvm.so+<span class="number">0x910ee8</span>]  java_start(Thread*)+<span class="number">0x108</span></span><br><span class="line">C  [libpthread.so<span class="meta">.0</span>+<span class="number">0x7dc5</span>]  start_thread+<span class="number">0xc5</span></span><br></pre></td></tr></table></figure><br>Current Thread表示crash时程序所处的线程。<br><strong>线程类别</strong>: JavaThread，共有以下几种</p>
+<ul>
+<li>JavaThread</li>
+<li>VMThread（负责VM内的一些操作，包括GC）</li>
+<li>CompilerThread</li>
+<li>GCTaskThread</li>
+<li>WatcherThread</li>
+<li>ConcurrentMarkSweepThread</li>
+</ul>
+<p><strong>线程状态</strong>：_thread_new</p>
+<table>
+<thead>
+<tr>
+<th>线程状态</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> _thread_uninitialized</td>
+<td>线程未被创建</td>
+</tr>
+<tr>
+<td> _thread_new</td>
+<td>线程创建但并未执行</td>
+</tr>
+<tr>
+<td> _thread_in_native</td>
+<td>线程正在运行native code</td>
+</tr>
+<tr>
+<td> _thread_in_vm</td>
+<td>执行VM的code</td>
+</tr>
+<tr>
+<td> _thread_in_java</td>
+<td>执行java的code</td>
+</tr>
+<tr>
+<td> _thread_blocked</td>
+<td>被block住的线程</td>
+</tr>
+</tbody>
+</table>
+<p><strong>原生堆栈信息（Native frames）</strong>: 主要是一些jvm动态库的对战信息，是分析crash中比较重要的一个部分。<br><figure class="highlight go"><table><tr><td class="code"><pre><span class="line">Java Threads: ( =&gt; current thread )</span><br><span class="line">=&gt;<span class="number">0x00007ff2d</span>8001000 JavaThread <span class="string">"flink-akka.remote.default-remote-dispatcher-15"</span> daemon [_thread_new, id=<span class="number">31925</span>, stack(<span class="number">0x00007ff340ced</span>000,<span class="number">0x00007ff340d</span>ee000)]</span><br><span class="line">  <span class="number">0x00007ff</span>2ec053800 JavaThread <span class="string">"Hashed wheel timer #1"</span> daemon [_thread_blocked, id=<span class="number">14219</span>, stack(<span class="number">0x00007ff33bdf</span>e000,<span class="number">0x00007ff33beff</span>000)]</span><br><span class="line">  <span class="number">0x00007ff2d</span>c130800 JavaThread <span class="string">"New I/O server boss #6"</span> daemon [_thread_in_native, id=<span class="number">14218</span>, stack(<span class="number">0x00007ff33beff</span>000,<span class="number">0x00007ff</span>33c000000)]</span><br><span class="line">  <span class="number">0x00007ff2d</span>c119800 JavaThread <span class="string">"New I/O worker #5"</span> daemon [_thread_in_native, id=<span class="number">14217</span>, stack(<span class="number">0x00007ff</span>3400e3000,<span class="number">0x00007ff</span>3401e4000)]</span><br><span class="line">  <span class="number">0x00007ff2d</span>c0b6000 JavaThread <span class="string">"New I/O worker #4"</span> daemon [_thread_in_native, id=<span class="number">14216</span>, stack(<span class="number">0x00007ff</span>3401e4000,<span class="number">0x00007ff</span>3402e5000)]</span><br><span class="line">  <span class="number">0x00007ff2d</span>c0bb800 JavaThread <span class="string">"New I/O boss #3"</span> daemon [_thread_in_native, id=<span class="number">14215</span>, stack(<span class="number">0x00007ff</span>3402e5000,<span class="number">0x00007ff</span>3403e6000)]</span><br><span class="line">  <span class="number">0x00007ff2d</span>c05c000 JavaThread <span class="string">"New I/O worker #2"</span> daemon [_thread_in_native, id=<span class="number">14214</span>, stack(<span class="number">0x00007ff</span>3403e6000,<span class="number">0x00007ff</span>3404e7000)]</span><br><span class="line">  <span class="number">0x00007ff2d</span>c052000 JavaThread <span class="string">"New I/O worker #1"</span> daemon [_thread_in_native, id=<span class="number">14213</span>, stack(<span class="number">0x00007ff</span>3404e7000,<span class="number">0x00007ff</span>3405e8000)]</span><br><span class="line">  <span class="number">0x00007ff</span>2c8009800 JavaThread <span class="string">"flink-akka.remote.default-remote-dispatcher-7"</span> daemon [_thread_in_vm, id=<span class="number">14206</span>, stack(<span class="number">0x00007ff</span>3407e8000,<span class="number">0x00007ff</span>3408e9000)]</span><br><span class="line">  <span class="number">0x00007ff</span>2c800c000 JavaThread <span class="string">"flink-akka.remote.default-remote-dispatcher-6"</span> daemon [_thread_in_native, id=<span class="number">14202</span>, stack(<span class="number">0x00007ff</span>3408e9000,<span class="number">0x00007ff</span>3409ea000)]</span><br><span class="line">  <span class="number">0x00007ff</span>2cc020000 JavaThread <span class="string">"flink-akka.actor.default-dispatcher-5"</span> daemon [_thread_blocked, id=<span class="number">14147</span>, stack(<span class="number">0x00007ff</span>3409ea000,<span class="number">0x00007ff</span>340aeb000)]</span><br><span class="line">  <span class="number">0x00007ff</span>36222a800 JavaThread <span class="string">"flink-akka.actor.default-dispatcher-4"</span> daemon [_thread_blocked, id=<span class="number">14136</span>, stack(<span class="number">0x00007ff</span>340aeb000,<span class="number">0x00007ff</span>340bec000)]</span><br><span class="line">  <span class="number">0x00007ff</span>362229000 JavaThread <span class="string">"flink-akka.actor.default-dispatcher-3"</span> daemon [_thread_blocked, id=<span class="number">14135</span>, stack(<span class="number">0x00007ff</span>340bec000,<span class="number">0x00007ff340ced</span>000)]</span><br><span class="line">  <span class="number">0x00007ff</span>362183000 JavaThread <span class="string">"flink-scheduler-1"</span> daemon [_thread_blocked, id=<span class="number">14044</span>, stack(<span class="number">0x00007ff340f</span>ee000,<span class="number">0x00007ff3410ef</span>000)]</span><br><span class="line">  <span class="number">0x00007ff</span>3614b4000 JavaThread <span class="string">"Timer for 'phoenix' metrics system"</span> daemon [_thread_blocked, id=<span class="number">14032</span>, stack(<span class="number">0x00007ff342df</span>a000,<span class="number">0x00007ff342ef</span>b000)]</span><br><span class="line">  <span class="number">0x00007ff360f</span>c1000 JavaThread <span class="string">"main-EventThread"</span> daemon [_thread_blocked, id=<span class="number">14031</span>, stack(<span class="number">0x00007ff3431f</span>c000,<span class="number">0x00007ff3432fd</span>000)]</span><br><span class="line">  <span class="number">0x00007ff360faf</span>000 JavaThread <span class="string">"main-SendThread(cnzk2:2181)"</span> daemon [_thread_in_native, id=<span class="number">14030</span>, stack(<span class="number">0x00007ff3432fd</span>000,<span class="number">0x00007ff3433f</span>e000)]</span><br><span class="line">  <span class="number">0x00007ff</span>360471000 JavaThread <span class="string">"Thread-80"</span> daemon [_thread_blocked, id=<span class="number">14029</span>, stack(<span class="number">0x00007ff3430f</span>b000,<span class="number">0x00007ff3431f</span>c000)]</span><br><span class="line">  <span class="number">0x00007ff</span>3608a7000 JavaThread <span class="string">"IPC Parameter Sending Thread #0"</span> daemon [_thread_blocked, id=<span class="number">13178</span>, stack(<span class="number">0x00007ff3437f</span>e000,<span class="number">0x00007ff3438ff</span>000)]</span><br><span class="line">  <span class="number">0x00007ff</span>3608a4000 JavaThread <span class="string">"IPC Client (1508059488) connection to cnhm0/10.0.1.222:8032 from apps"</span> daemon [_thread_blocked, id=<span class="number">13177</span>, stack(<span class="number">0x00007ff</span>348923000,<span class="number">0x00007ff</span>348a24000)]</span><br><span class="line">  <span class="number">0x00007ff3600df</span>800 JavaThread <span class="string">"Service Thread"</span> daemon [_thread_blocked, id=<span class="number">13172</span>, stack(<span class="number">0x00007ff</span>3498c5000,<span class="number">0x00007ff</span>3499c6000)]</span><br><span class="line">  <span class="number">0x00007ff3600d</span>2000 JavaThread <span class="string">"C1 CompilerThread2"</span> daemon [_thread_in_native, id=<span class="number">13171</span>, stack(<span class="number">0x00007ff</span>3499c6000,<span class="number">0x00007ff</span>349ac7000)]</span><br><span class="line">  <span class="number">0x00007ff3600d</span>0000 JavaThread <span class="string">"C2 CompilerThread1"</span> daemon [_thread_blocked, id=<span class="number">13170</span>, stack(<span class="number">0x00007ff</span>349ac7000,<span class="number">0x00007ff</span>349bc8000)]</span><br><span class="line">  <span class="number">0x00007ff3600cd</span>000 JavaThread <span class="string">"C2 CompilerThread0"</span> daemon [_thread_blocked, id=<span class="number">13169</span>, stack(<span class="number">0x00007ff</span>349bc8000,<span class="number">0x00007ff</span>349cc9000)]</span><br><span class="line">  <span class="number">0x00007ff</span>3600cb000 JavaThread <span class="string">"JDWP Event Helper Thread"</span> daemon [_thread_blocked, id=<span class="number">13168</span>, stack(<span class="number">0x00007ff</span>349cc9000,<span class="number">0x00007ff349d</span>ca000)]</span><br><span class="line">  <span class="number">0x00007ff</span>3600c7000 JavaThread <span class="string">"JDWP Transport Listener: dt_socket"</span> daemon [_thread_in_native, id=<span class="number">13167</span>, stack(<span class="number">0x00007ff349d</span>ca000,<span class="number">0x00007ff</span>349ecb000)]</span><br><span class="line">  <span class="number">0x00007ff</span>3600b8000 JavaThread <span class="string">"Signal Dispatcher"</span> daemon [_thread_blocked, id=<span class="number">13166</span>, stack(<span class="number">0x00007ff34a0cf</span>000,<span class="number">0x00007ff34a1d</span>0000)]</span><br><span class="line">  <span class="number">0x00007ff</span>36008c000 JavaThread <span class="string">"Finalizer"</span> daemon [_thread_blocked, id=<span class="number">13165</span>, stack(<span class="number">0x00007ff34a1d</span>0000,<span class="number">0x00007ff34a2d</span>1000)]</span><br><span class="line">  <span class="number">0x00007ff</span>36008a000 JavaThread <span class="string">"Reference Handler"</span> daemon [_thread_blocked, id=<span class="number">13164</span>, stack(<span class="number">0x00007ff34a2d</span>1000,<span class="number">0x00007ff34a3d</span>2000)]</span><br><span class="line">  <span class="number">0x00007ff</span>360017000 JavaThread <span class="string">"main"</span> [_thread_blocked, id=<span class="number">13158</span>, stack(<span class="number">0x00007ff</span>369c7a000,<span class="number">0x00007ff369d</span>7b000)]</span><br><span class="line"></span><br><span class="line">Other Threads:</span><br><span class="line">  <span class="number">0x00007ff</span>360085000 VMThread [stack: <span class="number">0x00007ff34a3d</span>2000,<span class="number">0x00007ff34a4d</span>3000] [id=<span class="number">13163</span>]</span><br><span class="line">  <span class="number">0x00007ff</span>3600e2000 WatcherThread [stack: <span class="number">0x00007ff</span>3497c4000,<span class="number">0x00007ff</span>3498c5000] [id=<span class="number">13173</span>]</span><br></pre></td></tr></table></figure><br>这一部分是crash时Java代码中所有线程的状况。分析类似上一部分。<br><figure class="highlight livecodeserver"><table><tr><td class="code"><pre><span class="line">VM state:<span class="keyword">not</span> <span class="keyword">at</span> safepoint (<span class="keyword">normal</span> execution)</span><br><span class="line">VM Mutex/Monitor currently owned <span class="keyword">by</span> <span class="keyword">a</span> thread: None</span><br></pre></td></tr></table></figure><br><strong>VM状态</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>状态</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>not at a safepoint</td>
+<td style="text-align:center">正常执行</td>
+</tr>
+<tr>
+<td>at safepoint</td>
+<td style="text-align:center">所有VM内的线程被block住，在等待某一个VM操作完成</td>
+</tr>
+<tr>
+<td>synchronizing</td>
+<td style="text-align:center">一个特殊VM操作需要执行，VM在等待所有线程block</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight x86asm"><table><tr><td class="code"><pre><span class="line"><span class="symbol">Heap:</span></span><br><span class="line"> PSYoungGen  total 39424K, used 31166K [<span class="number">0x0000000771a00000</span>, <span class="number">0x0000000774780000</span>, <span class="number">0x00000007c0000000</span>)</span><br><span class="line">  eden space 38912K, <span class="number">79</span>% used [<span class="number">0x0000000771a00000</span>,<span class="number">0x000000077384faf0</span>,<span class="number">0x0000000774000000</span>)</span><br><span class="line">  from space 512K, <span class="number">25</span>% used [<span class="number">0x0000000774680000</span>,<span class="number">0x00000007746a0000</span>,<span class="number">0x0000000774700000</span>)</span><br><span class="line">  to   space 512K, <span class="number">0</span>% used [<span class="number">0x0000000774700000</span>,<span class="number">0x0000000774700000</span>,<span class="number">0x0000000774780000</span>)</span><br><span class="line"> ParOldGen   total 124928K, used 67043K [<span class="number">0x00000006d4e00000</span>, <span class="number">0x00000006dc800000</span>, <span class="number">0x0000000771a00000</span>)</span><br><span class="line">  object space 124928K, <span class="number">53</span>% used [<span class="number">0x00000006d4e00000</span>,<span class="number">0x00000006d8f78d18</span>,<span class="number">0x00000006dc800000</span>)</span><br><span class="line"> Metaspace   used 54122K, capacity 54748K, committed 54912K, reserved 1097728K</span><br><span class="line">  class spaceused 6562K, capacity 6716K, committed 6784K, reserved 1048576K</span><br><span class="line"></span><br><span class="line">Card table byte_map: [<span class="number">0x00007ff3664db000</span>,<span class="number">0x00007ff366c35000</span>] byte_map_base: <span class="number">0x00007ff362e34000</span></span><br><span class="line"></span><br><span class="line">Marking <span class="meta">Bits</span>: (ParMarkBitMap*) <span class="number">0x00007ff3691426c0</span></span><br><span class="line"> Begin <span class="meta">Bits</span>: [<span class="number">0x00007ff324a70000</span>, <span class="number">0x00007ff328538000</span>)</span><br><span class="line"> End <span class="meta">Bits</span>:   [<span class="number">0x00007ff328538000</span>, <span class="number">0x00007ff32c000000</span>)</span><br><span class="line"></span><br><span class="line">Polling page: <span class="number">0x00007ff369d84000</span></span><br><span class="line"></span><br><span class="line"><span class="symbol">CodeCache:</span> size=245760Kb used=17958Kb max_used=18385Kb free=227801Kb</span><br><span class="line"> bounds [<span class="number">0x00007ff34aad9000</span>, <span class="number">0x00007ff34bd29000</span>, <span class="number">0x00007ff359ad9000</span>]</span><br><span class="line"> total_blobs=<span class="number">6019</span> nmethods=<span class="number">5425</span> adapters=<span class="number">516</span></span><br><span class="line"><span class="symbol"> compilation:</span> enabled</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Card Table是jvm维护的一种数据结构，用于记录更改对象时的引用，方便GC。</li>
+<li>CodeCache是用来保存本地代码的，不属于PermGen。</li>
+</ul>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">Compilation <span class="keyword">events</span> (<span class="number">10</span> <span class="keyword">events</span>):</span><br><span class="line">GC Heap History (<span class="number">10</span> <span class="keyword">events</span>):</span><br><span class="line">Deoptimization <span class="keyword">events</span> (<span class="number">10</span> <span class="keyword">events</span>):</span><br><span class="line">Internal exceptions (<span class="number">10</span> <span class="keyword">events</span>):</span><br><span class="line">Events (<span class="number">10</span> <span class="keyword">events</span>):</span><br><span class="line">Dynamic libraries:</span><br></pre></td></tr></table></figure>
+        
+          <div class="more-link">
+            <a href="/2018/04/11/hs-err-pid-log里是些什么？/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2018/03/20/Flink的Exactly-Once/">Flink的Exactly-Once</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2018-03-19T17:41:00.000Z" itemprop="datePublished">
+    2018-03-20
+  </time>
+  
+  | 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/tags/flink/">flink</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/tags/exactly-once/">exactly-once</a> }
+  </li>
+
+
+  </ul>
+  
+  
+</div>
+
+    </header>
+    <div>
+      
+        <p><a href="https://flink.apache.org/features/2018/03/01/end-to-end-exactly-once-apache-flink.html" target="_blank" rel="noopener">Official Document</a></p>
+<h3 id="闲扯"><a href="#闲扯" class="headerlink" title="闲扯"></a>闲扯</h3><p>最近Spark2.3正式发布，流处理不再试Beta版，Spark的Structure Streaming几乎是拥有了Flink的所有功能，生态社区做得好就是不一样，Flink该加把劲了…</p>
+<hr>
+<h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>Exactly-once是一个经常提到的语义，也是程序开发中，需要尽可能做到的一个理想状态。这种语义其实放在分布式程序中有很多种理解，比如读取数据源Exactly-once，Process过程Exactly-once，存储数据Exactly-once，但我们常用的理解方式是End-to-end的语义，也就是说，每一个输入，只会影响一次输出。</p>
+<hr>
+<h3 id="Exacly-once"><a href="#Exacly-once" class="headerlink" title="Exacly-once"></a>Exacly-once</h3><p>既然是分布式的程序，要达到Exactly-once的语义，在输出那层，就应该只有两种情况，要么一起输出，要么一起不输出。Flink为此就提供了一个<strong>TwoPhaseCommitSinkFunction</strong>的抽象类用来完成这一语义，<a href="https://issues.apache.org/jira/browse/FLINK-7210" target="_blank" rel="noopener">JIRA</a>，<a href="https://github.com/apache/flink/pull/4368" target="_blank" rel="noopener">PR</a>。<br>顾名思义，此类利用了Checkpoint机制提供了两个Phase(步骤)：</p>
+<ol>
+<li>preCommit()</li>
+<li>commit()</li>
+</ol>
+        
+          <div class="more-link">
+            <a href="/2018/03/20/Flink的Exactly-Once/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2018/03/20/aerospike/">Aerospike学习笔记</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2018-03-19T17:01:00.000Z" itemprop="datePublished">
+    2018-03-20
+  </time>
+  
+  | 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/tags/Aerospike/">Aerospike</a> }
+  </li>
+
+
+  </ul>
+  
+  
+</div>
+
+    </header>
+    <div>
+      
+        <h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><p>在很多业务场景比如反欺诈、广告定向推荐、数字身份验证等，这些场景都有一些共同的特点： </p>
+<ul>
+<li>读多于写    </li>
+<li>随机读   </li>
+<li>延迟低   </li>
+</ul>
+<p>数据量不大时，有很多优秀的框架可以使用，比如单机的redis、Cassandra等，它们不但满足上述需求而且还有着易于运维、管理方便的优点，但随着业务规模扩大，不可预测的大流量、查询延时低效都成为了比较难解决的痛点。<br>Aerospike在2012年作为分布式KV数据库出现后，以稳定性和延迟低的特点让不少公司开始试水，到如今4.0版本发布，6年时间里Aerospike已经积累了不少在不同行业的成功案例。</p>
+<hr>
+<h3 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h3><p>我理解在Aerospike的Data model其实和Hbase中的namespace/table/row/column family非常类似。   </p>
+<ul>
+<li><strong>namespace</strong><ul>
+<li>namespace是最高层级的一个容器概念，决定了这个容器中的数据的存储方式，有着如下的配置    </li>
+<li>如何存储，可以选择全部存储到DRAM或者SSD上</li>
+<li>replica复制因子，决定了这个namespace的高可用性</li>
+<li>expire TTL</li>
+</ul>
+</li>
+<li><strong>sets</strong><ul>
+<li>sets是可选项，数据存储时可以指定set也可以不指定，在set中可以设置基于set的二级索引</li>
+</ul>
+</li>
+<li><strong>records</strong><ul>
+<li>record就是一行记录了，包括:<ul>
+<li>key</li>
+<li>metadata(版本号(version), ttl, last-update-time(lut))</li>
+<li>bins</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>bins</strong><ul>
+<li>包括name和value（类似列名和值）</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="查询索引"><a href="#查询索引" class="headerlink" title="查询索引"></a>查询索引</h3>
+        
+          <div class="more-link">
+            <a href="/2018/03/20/aerospike/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+
+            <footer>
+    <div>© 2018 - Liao Jiayi </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+<script src="/js/pager/dist/singlepager.js"></script>
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

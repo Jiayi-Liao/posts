@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>W - 廖嘉逸</title>
+  <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+  <script src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?f338e6e48171cfc763820c8cbdff7286";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url()">
+        <div class='av-pic' style="background-image: url(/assets/avatar.jpg)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>W - 廖嘉逸</div>
+        
+            <div>Liao Jiayi</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/about/" class="Btn">
+              <li>About</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+            
+                <a href="https://github.com/buptljy">
+                    <img src="/assets/github.svg" />
+                </a>
+            
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+    <header class='PageTitle'>
+        <h1>{ flink }</h1>
+    </header>
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2018/03/20/Flink的Exactly-Once/">Flink的Exactly-Once</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2018-03-19T17:41:00.000Z" itemprop="datePublished">
+    2018-03-20
+  </time>
+  
+  | 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/tags/flink/">flink</a> }
+  </li>
+
+  <li class="meta-text">
+  { <a href="/tags/exactly-once/">exactly-once</a> }
+  </li>
+
+
+  </ul>
+  
+  
+</div>
+
+    </header>
+    <div>
+      
+        <p><a href="https://flink.apache.org/features/2018/03/01/end-to-end-exactly-once-apache-flink.html" target="_blank" rel="noopener">Official Document</a></p>
+<h3 id="闲扯"><a href="#闲扯" class="headerlink" title="闲扯"></a>闲扯</h3><p>最近Spark2.3正式发布，流处理不再试Beta版，Spark的Structure Streaming几乎是拥有了Flink的所有功能，生态社区做得好就是不一样，Flink该加把劲了…</p>
+<hr>
+<h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>Exactly-once是一个经常提到的语义，也是程序开发中，需要尽可能做到的一个理想状态。这种语义其实放在分布式程序中有很多种理解，比如读取数据源Exactly-once，Process过程Exactly-once，存储数据Exactly-once，但我们常用的理解方式是End-to-end的语义，也就是说，每一个输入，只会影响一次输出。</p>
+<hr>
+<h3 id="Exacly-once"><a href="#Exacly-once" class="headerlink" title="Exacly-once"></a>Exacly-once</h3><p>既然是分布式的程序，要达到Exactly-once的语义，在输出那层，就应该只有两种情况，要么一起输出，要么一起不输出。Flink为此就提供了一个<strong>TwoPhaseCommitSinkFunction</strong>的抽象类用来完成这一语义，<a href="https://issues.apache.org/jira/browse/FLINK-7210" target="_blank" rel="noopener">JIRA</a>，<a href="https://github.com/apache/flink/pull/4368" target="_blank" rel="noopener">PR</a>。<br>顾名思义，此类利用了Checkpoint机制提供了两个Phase(步骤)：</p>
+<ol>
+<li>preCommit()</li>
+<li>commit()</li>
+</ol>
+        
+          <div class="more-link">
+            <a href="/2018/03/20/Flink的Exactly-Once/#more">Read On »</a>
+          </div>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+
+
+            <footer>
+    <div>© 2018 - Liao Jiayi </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+<script src="/js/pager/dist/singlepager.js"></script>
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>
