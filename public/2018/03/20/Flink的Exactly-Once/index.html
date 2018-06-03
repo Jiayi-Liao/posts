@@ -86,9 +86,9 @@
 <li>preCommit()</li>
 <li>commit()</li>
 </ol>
-<h4 id="preCommit-示意图："><a href="#preCommit-示意图：" class="headerlink" title="preCommit()示意图："></a>preCommit()示意图：</h4><p><img src="http://liaojiayi.com/static/flink-2.png" alt="flink-precommit"><br>这个示意图描述了一个从kafka读取数据，采用WindowFunction做处理，最后再存储到kafka里的数据流。在Checkpoint过程中，首先在Datasource上用barrier把数据流切成两部分并不断传递下去触发snapshot，以保证所有的snapshot都是在相同一部分数据下产生的，最后一个阶段调用Sink函数的Pre-commit()表示，所有的Taskmanager的Sink都可以进行commit()操作了。</p>
+<h4 id="preCommit-示意图："><a href="#preCommit-示意图：" class="headerlink" title="preCommit()示意图："></a>preCommit()示意图：</h4><p><img src="http://liaojiayi.com/assets/flink-2.png" alt="flink-precommit"><br>这个示意图描述了一个从kafka读取数据，采用WindowFunction做处理，最后再存储到kafka里的数据流。在Checkpoint过程中，首先在Datasource上用barrier把数据流切成两部分并不断传递下去触发snapshot，以保证所有的snapshot都是在相同一部分数据下产生的，最后一个阶段调用Sink函数的Pre-commit()表示，所有的Taskmanager的Sink都可以进行commit()操作了。</p>
 <p><strong>注意此时并不能直接commit，因为taskmanager之间彼此并不知道其他的节点是否准备好了commit！</strong></p>
-<h4 id="commit-示意图："><a href="#commit-示意图：" class="headerlink" title="commit()示意图："></a>commit()示意图：</h4><p><img src="http://liaojiayi.com/static/flink-3.png" alt="flink-commit"><br>在checkpoint结束之后，JobManager会通知Listener们调用各自的Callback，<strong>此时Sink对象如果收到了JobManager发出的checkpointCompleted的通知，就知道所有的节点都准备好commit</strong>，然后此时才是真正的commit。</p>
+<h4 id="commit-示意图："><a href="#commit-示意图：" class="headerlink" title="commit()示意图："></a>commit()示意图：</h4><p><img src="http://liaojiayi.com/assets/flink-3.png" alt="flink-commit"><br>在checkpoint结束之后，JobManager会通知Listener们调用各自的Callback，<strong>此时Sink对象如果收到了JobManager发出的checkpointCompleted的通知，就知道所有的节点都准备好commit</strong>，然后此时才是真正的commit。</p>
 <hr>
 <h3 id="用法详解"><a href="#用法详解" class="headerlink" title="用法详解"></a>用法详解</h3><p>简单来说，其实就是两步输出达到Exactly-once的思想，在很多地方都有用到。比如Hive在写表时，先将要写入的文件放入一个临时目录，然后再移入到target directory。</p>
 <p><strong>对应到程序里就4个步骤</strong>：</p>

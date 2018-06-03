@@ -73,7 +73,7 @@
             <ul class="Index">
   
     <header class='PageTitle'>
-        <h1>{ Aerospike }</h1>
+        <h1>{ aerospike }</h1>
     </header>
   
   
@@ -147,85 +147,7 @@
 
     </li>
   
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2018/03/20/aerospike/">Aerospike学习笔记</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2018-03-19T17:01:00.000Z" itemprop="datePublished">
-    2018-03-20
-  </time>
-  
-  | 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/tags/Aerospike/">Aerospike</a> }
-  </li>
-
-
-  </ul>
-  
-  
-</div>
-
-    </header>
-    <div>
-      
-        <h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><p>在很多业务场景比如反欺诈、广告定向推荐、数字身份验证等，这些场景都有一些共同的特点： </p>
-<ul>
-<li>读多于写    </li>
-<li>随机读   </li>
-<li>延迟低   </li>
 </ul>
-<p>数据量不大时，有很多优秀的框架可以使用，比如单机的redis、Cassandra等，它们不但满足上述需求而且还有着易于运维、管理方便的优点，但随着业务规模扩大，不可预测的大流量、查询延时低效都成为了比较难解决的痛点。<br>Aerospike在2012年作为分布式KV数据库出现后，以稳定性和延迟低的特点让不少公司开始试水，到如今4.0版本发布，6年时间里Aerospike已经积累了不少在不同行业的成功案例。</p>
-<hr>
-<h3 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h3><p>我理解在Aerospike的Data model其实和Hbase中的namespace/table/row/column family非常类似。   </p>
-<ul>
-<li><strong>namespace</strong><ul>
-<li>namespace是最高层级的一个容器概念，决定了这个容器中的数据的存储方式，有着如下的配置    </li>
-<li>如何存储，可以选择全部存储到DRAM或者SSD上</li>
-<li>replica复制因子，决定了这个namespace的高可用性</li>
-<li>expire TTL</li>
-</ul>
-</li>
-<li><strong>sets</strong><ul>
-<li>sets是可选项，数据存储时可以指定set也可以不指定，在set中可以设置基于set的二级索引</li>
-</ul>
-</li>
-<li><strong>records</strong><ul>
-<li>record就是一行记录了，包括:<ul>
-<li>key</li>
-<li>metadata(版本号(version), ttl, last-update-time(lut))</li>
-<li>bins</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>bins</strong><ul>
-<li>包括name和value（类似列名和值）</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h3 id="查询索引"><a href="#查询索引" class="headerlink" title="查询索引"></a>查询索引</h3>
-        
-          <div class="more-link">
-            <a href="/2018/03/20/aerospike/#more">Read On »</a>
-          </div>
-        
-      
-    </div>
-</article>
-
-    </li>
-  
-</ul>
-
 
 
             <footer>

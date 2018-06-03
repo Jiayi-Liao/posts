@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>W - 廖嘉逸</title>
+  <title>Aerospike笔记（二）- 写机制 | W - 廖嘉逸</title>
   <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
   <script src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
@@ -70,53 +70,13 @@
 
     <div class="container">
         <div data-pager-shell>
-            <ul class="Index">
-  
+            <div>
+  <article class='ContentView'>
     <header class='PageTitle'>
-        <h1>{ Aerospike }</h1>
+        <h1>Aerospike笔记（二）- 写机制</h1>
     </header>
-  
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2018/06/03/Aerospike笔记（二）-写机制/">Aerospike笔记（二）- 写机制</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2018-06-03T07:21:29.000Z" itemprop="datePublished">
-    2018-06-03
-  </time>
-  
-  | 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/tags/Aerospike/">Aerospike</a> }
-  </li>
-
-
-  </ul>
-  
-  
-  / 
-  <ul>
-    
-  <li class="meta-text">
-  { <a href="/categories/aerospike/">aerospike</a> }
-  </li>
-
-
-  </ul>
-  
-</div>
-
-    </header>
-    <div>
-      
-        <p>最近使用Aerospike遇到了不少的问题，在不断地看日志，读源码，阅读<a href="https://discuss.aerospike.com/t/device-overload-when-map-size-is-too-big/5206" target="_blank" rel="noopener">Aerospike社区</a>的各种文章之后，也算是对Aerospike有了一些更深的了解。</p>
+    <section>
+      <p>最近使用Aerospike遇到了不少的问题，在不断地看日志，读源码，阅读<a href="https://discuss.aerospike.com/t/device-overload-when-map-size-is-too-big/5206" target="_blank" rel="noopener">Aerospike社区</a>的各种文章之后，也算是对Aerospike有了一些更深的了解。</p>
 <h4 id="Storage-Layout"><a href="#Storage-Layout" class="headerlink" title="Storage Layout"></a>Storage Layout</h4><p><img src="http://liaojiayi.com/assets/aerospike0.png" alt="Storage Layout"><br>SSD namespace的写流程基本如上图所示，现在，让我们假设有一个写操作<strong><em>MapOperation.PUT</em></strong>正在进行，它的路径将会是这样：  </p>
 <ol>
 <li>根据<strong>MapOperation.PUT</strong>的各种参数和策略，来校验Metadata，例如namespace、set是否存在，然后写入到最小写单元block5中。  </li>
@@ -135,98 +95,59 @@
 <li>刚刚提到evict操作会将数据提前过期，这个可以通过high-water-memory-pct和high-water-dist-pct来调整evict的策略。</li>
 </ul>
 <hr>
-<h4 id="Log-Inspection"><a href="#Log-Inspection" class="headerlink" title="Log Inspection"></a>Log Inspection</h4>
-        
-          <div class="more-link">
-            <a href="/2018/06/03/Aerospike笔记（二）-写机制/#more">Read On »</a>
-          </div>
-        
-      
-    </div>
-</article>
+<h4 id="Log-Inspection"><a href="#Log-Inspection" class="headerlink" title="Log Inspection"></a>Log Inspection</h4><p>Log是最容易看出问题的方式，但是as的Log有些表达显得略有晦涩，采取了不少缩写的表达，目前来看，log level调整为 info 已经能够帮助定位大部分问题，这里挑取一些关键信息做一下记录。<br><figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">&#123;test&#125; <span class="regexp">/dev/</span>xvdc: used-bytes <span class="number">3695468032</span> free-wblocks <span class="number">34690</span> <span class="keyword">write</span>-q <span class="number">0</span> <span class="keyword">write</span> (<span class="number">445674</span>,<span class="number">0.0</span>) defrag-q <span class="number">0</span> defrag-<span class="keyword">read</span> (<span class="number">39134</span>,<span class="number">0.0</span>) defrag-<span class="keyword">write</span> (<span class="number">5427</span>,<span class="number">0.0</span>)</span><br></pre></td></tr></table></figure></p>
+<p>这是as定时output出的某个节点的基本情况，针对namespace test，在/dev/xvdc的SSD上，已经使用了3695468032 bytes的磁盘空间，当前可以使用的free-wblocks有34690个，write-queue长度为0，写入了445674个(包括defrag)blocks，当前写入速率为0.0，defrag-queue长度为0，加入到defrag队列中的有 39134个blocks，当前速率为0.0，真正产生defrag的block数为5427，当前速率为0.0。<br><figure class="highlight less"><table><tr><td class="code"><pre><span class="line">&#123;<span class="selector-tag">test</span>&#125; <span class="selector-tag">breached</span> <span class="selector-tag">eviction</span> <span class="selector-tag">hwm</span> (memory), <span class="selector-tag">memory</span> <span class="selector-tag">sz</span><span class="selector-pseudo">:1792174976</span> (<span class="number">1792174976</span> + <span class="number">0</span>) <span class="selector-tag">hwm</span><span class="selector-pseudo">:1288490188</span>, <span class="selector-tag">disk</span> <span class="selector-tag">sz</span><span class="selector-pseudo">:3695922432</span> <span class="selector-tag">hwm</span><span class="selector-pseudo">:20128464896</span></span><br><span class="line"><span class="selector-tag">no</span> <span class="selector-tag">records</span> <span class="selector-tag">below</span> <span class="selector-tag">eviction</span> <span class="selector-tag">void-time</span> <span class="selector-tag">266233878</span> <span class="selector-tag">-</span> <span class="selector-tag">threshold</span> <span class="selector-tag">bucket</span> <span class="selector-tag">4678</span>, <span class="selector-tag">width</span> <span class="selector-tag">113</span> <span class="selector-tag">sec</span>, <span class="selector-tag">count</span> <span class="selector-tag">298</span> &gt; <span class="selector-tag">target</span> <span class="selector-tag">11</span> (<span class="number">0.5</span> pct)</span><br></pre></td></tr></table></figure></p>
+<p>这条log和<a href="https://discuss.aerospike.com/t/records-ttl-and-evictions-for-aerospike-server-version-prior-to-3-8/737" target="_blank" rel="noopener">as的evict机制</a>有关，这里是表示当前size已经超过了hwm，触发了eviction，但是由于count 298 &gt; target 11（bucket是最小的evict单位，此时找到了最大可以evict的个数为11个，但是最近的bucket中有298个，所以无法触发）。</p>
 
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
+
       
-        <h1>
-          <a href="/2018/03/20/aerospike/">Aerospike学习笔记</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2018-03-19T17:01:00.000Z" itemprop="datePublished">
-    2018-03-20
-  </time>
-  
-  | 
-  <ul>
+
+    </section>
     
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2018-06-03T07:21:29.000Z" itemprop="datePublished">
+              2018-06-03
+            </time>
+          </div>
+          
+            <div>
+              tags: 
   <li class="meta-text">
   { <a href="/tags/Aerospike/">Aerospike</a> }
   </li>
 
 
-  </ul>
-  
-  
-</div>
+            </div>
+          
+      </section>
+    
 
-    </header>
-    <div>
-      
-        <h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><p>在很多业务场景比如反欺诈、广告定向推荐、数字身份验证等，这些场景都有一些共同的特点： </p>
-<ul>
-<li>读多于写    </li>
-<li>随机读   </li>
-<li>延迟低   </li>
-</ul>
-<p>数据量不大时，有很多优秀的框架可以使用，比如单机的redis、Cassandra等，它们不但满足上述需求而且还有着易于运维、管理方便的优点，但随着业务规模扩大，不可预测的大流量、查询延时低效都成为了比较难解决的痛点。<br>Aerospike在2012年作为分布式KV数据库出现后，以稳定性和延迟低的特点让不少公司开始试水，到如今4.0版本发布，6年时间里Aerospike已经积累了不少在不同行业的成功案例。</p>
-<hr>
-<h3 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h3><p>我理解在Aerospike的Data model其实和Hbase中的namespace/table/row/column family非常类似。   </p>
-<ul>
-<li><strong>namespace</strong><ul>
-<li>namespace是最高层级的一个容器概念，决定了这个容器中的数据的存储方式，有着如下的配置    </li>
-<li>如何存储，可以选择全部存储到DRAM或者SSD上</li>
-<li>replica复制因子，决定了这个namespace的高可用性</li>
-<li>expire TTL</li>
-</ul>
-</li>
-<li><strong>sets</strong><ul>
-<li>sets是可选项，数据存储时可以指定set也可以不指定，在set中可以设置基于set的二级索引</li>
-</ul>
-</li>
-<li><strong>records</strong><ul>
-<li>record就是一行记录了，包括:<ul>
-<li>key</li>
-<li>metadata(版本号(version), ttl, last-update-time(lut))</li>
-<li>bins</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>bins</strong><ul>
-<li>包括name和value（类似列名和值）</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h3 id="查询索引"><a href="#查询索引" class="headerlink" title="查询索引"></a>查询索引</h3>
-        
-          <div class="more-link">
-            <a href="/2018/03/20/aerospike/#more">Read On »</a>
-          </div>
-        
-      
-    </div>
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <script>
+        var gitment = new Gitment({
+	    id: 'aerospike2',
+            owner: 'buptljy',
+            repo: 'blog-project',
+            oauth: {
+                client_id: 'ba3678010728699dcb1c',
+                client_secret: '559aec5ee68930b3582de402ad0bdb9c40fa6b4a',
+            },
+        })
+        gitment.render('comments')
+    </script>
+</section>
+
+
 </article>
 
-    </li>
   
-</ul>
-
-
+</div>
 
             <footer>
     <div>© 2018 - Liao Jiayi </div>
