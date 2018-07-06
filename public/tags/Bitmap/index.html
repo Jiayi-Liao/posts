@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>W - 廖嘉逸</title>
+  <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+  <script src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?f338e6e48171cfc763820c8cbdff7286";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url()">
+        <div class='av-pic' style="background-image: url()">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>W - 廖嘉逸</div>
+        
+            <div>Liao Jiayi</div>
+        
+        <ul>
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <ul class="Index">
+  
+    <header class='PageTitle'>
+        <h1>{ Bitmap }</h1>
+    </header>
+  
+  
+    <li>
+      <article class='ListView'>
+    <header class="title">
+      
+        <h1>
+          <a href="/2018/07/06/Bitmap的小研究/">Bitmap的小研究</a>
+        </h1>
+      
+      <div class='ListMeta'>
+  <time datetime="2018-07-06T08:46:00.000Z" itemprop="datePublished">
+    2018-07-06
+  </time>
+  
+  | 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/tags/Bitmap/">Bitmap</a> }
+  </li>
+
+
+  </ul>
+  
+  
+  / 
+  <ul>
+    
+  <li class="meta-text">
+  { <a href="/categories/bitmap/">bitmap</a> }
+  </li>
+
+
+  </ul>
+  
+</div>
+
+    </header>
+    <div>
+      
+        <p><strong>Paper原文地址</strong>：<a href="http://db.ucsd.edu/wp-content/uploads/2017/03/sidm338-wangA.pdf" target="_blank" rel="noopener">An Experimental Study of Bitmap Compression vs.<br>Inverted List Compression</a><br>Bitmap可以说是一个很万能的存储了，无论是空间消耗，还是查询响应，在最佳实践下，都可以达到很好的效果。最近做了不少Bitmap的研究，简单的基于上面的Paper去做一个记录。</p>
+<hr>
+<h2 id="History"><a href="#History" class="headerlink" title="History"></a>History</h2><p>从最原始的Bitmap到RoaringBitmap（可能是目前大多数场景的最佳选择？），虽然仔细研究Roaring的原理并不复杂，但也是经过了十几年的变化和迭代。  </p>
+<h4 id="WAH-Word-Aligned-Hybrid"><a href="#WAH-Word-Aligned-Hybrid" class="headerlink" title="WAH(Word Aligned Hybrid)"></a>WAH(Word Aligned Hybrid)</h4><p>这个算法只压缩全0或者全1的group。将所有bits按照连续的31bit进行分组，然后对每一组进行编码，编码后的长度为32bit。具体结构如下图所示：<br><img src="http://liaojiayi.com/assets/WAH.png" alt="WAH"></p>
+<h4 id="EWAH-Enhanced-Word-Aligned-Hybrid"><a href="#EWAH-Enhanced-Word-Aligned-Hybrid" class="headerlink" title="EWAH(Enhanced Word Aligned Hybrid)"></a>EWAH(Enhanced Word Aligned Hybrid)</h4><p>基于WAH加了一个Header，作为元信息的存储。我理解这其实并没有在存储上做到太多帮助的优化，反而是在查询或者插入中，会更加便捷。Header结构如下所示。<br><img src="http://liaojiayi.com/assets/EWAH.png" alt="EWAH"></p>
+<h4 id="CONCISE-Compressed-N-Composble-Integer-Set"><a href="#CONCISE-Compressed-N-Composble-Integer-Set" class="headerlink" title="CONCISE(Compressed N Composble Integer Set)"></a>CONCISE(Compressed N Composble Integer Set)</h4><p>这也是基于WAH做的一个优化。在WAH算法中，只要有一个bit被置1，那么整个group都无法被压缩，这一算法在这种odd bit上做了优化。记录了这个单一odd bit的位置。<br><img src="http://liaojiayi.com/assets/CONCISE.png" alt="CONCISE"></p>
+        
+      
+    </div>
+</article>
+
+    </li>
+  
+</ul>
+
+
+
+            <footer>
+    <div>© 2018 - Liao Jiayi </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+<script src="/js/pager/dist/singlepager.js"></script>
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>

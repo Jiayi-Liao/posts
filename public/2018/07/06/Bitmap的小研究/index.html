@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Bitmap的小研究 | W - 廖嘉逸</title>
+  <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+  <script src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?f338e6e48171cfc763820c8cbdff7286";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url()">
+        <div class='av-pic' style="background-image: url()">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>W - 廖嘉逸</div>
+        
+            <div>Liao Jiayi</div>
+        
+        <ul>
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>Bitmap的小研究</h1>
+    </header>
+    <section>
+      <p><strong>Paper原文地址</strong>：<a href="http://db.ucsd.edu/wp-content/uploads/2017/03/sidm338-wangA.pdf" target="_blank" rel="noopener">An Experimental Study of Bitmap Compression vs.<br>Inverted List Compression</a><br>Bitmap可以说是一个很万能的存储了，无论是空间消耗，还是查询响应，在最佳实践下，都可以达到很好的效果。最近做了不少Bitmap的研究，简单的基于上面的Paper去做一个记录。</p>
+<hr>
+<h2 id="History"><a href="#History" class="headerlink" title="History"></a>History</h2><p>从最原始的Bitmap到RoaringBitmap（可能是目前大多数场景的最佳选择？），虽然仔细研究Roaring的原理并不复杂，但也是经过了十几年的变化和迭代。  </p>
+<h4 id="WAH-Word-Aligned-Hybrid"><a href="#WAH-Word-Aligned-Hybrid" class="headerlink" title="WAH(Word Aligned Hybrid)"></a>WAH(Word Aligned Hybrid)</h4><p>这个算法只压缩全0或者全1的group。将所有bits按照连续的31bit进行分组，然后对每一组进行编码，编码后的长度为32bit。具体结构如下图所示：<br><img src="http://liaojiayi.com/assets/WAH.png" alt="WAH"></p>
+<h4 id="EWAH-Enhanced-Word-Aligned-Hybrid"><a href="#EWAH-Enhanced-Word-Aligned-Hybrid" class="headerlink" title="EWAH(Enhanced Word Aligned Hybrid)"></a>EWAH(Enhanced Word Aligned Hybrid)</h4><p>基于WAH加了一个Header，作为元信息的存储。我理解这其实并没有在存储上做到太多帮助的优化，反而是在查询或者插入中，会更加便捷。Header结构如下所示。<br><img src="http://liaojiayi.com/assets/EWAH.png" alt="EWAH"></p>
+<h4 id="CONCISE-Compressed-N-Composble-Integer-Set"><a href="#CONCISE-Compressed-N-Composble-Integer-Set" class="headerlink" title="CONCISE(Compressed N Composble Integer Set)"></a>CONCISE(Compressed N Composble Integer Set)</h4><p>这也是基于WAH做的一个优化。在WAH算法中，只要有一个bit被置1，那么整个group都无法被压缩，这一算法在这种odd bit上做了优化。记录了这个单一odd bit的位置。<br><img src="http://liaojiayi.com/assets/CONCISE.png" alt="CONCISE"></p>
+<h4 id="VALWAH-Variable-Aligned-Length-WAH"><a href="#VALWAH-Variable-Aligned-Length-WAH" class="headerlink" title="VALWAH(Variable-Aligned Length WAH)"></a>VALWAH(Variable-Aligned Length WAH)</h4><p>基于参数的优化，缓解了WAH的每个group固定32bit的限制（因为32bit最多能表示2^31 - 1个压缩group，但是实际上不会那么多）。采用了参数去调控，没有固定的规则，对于不同的bitmap自动采用不同的参数，很影响查询的效率。</p>
+<h4 id="Roaring"><a href="#Roaring" class="headerlink" title="Roaring"></a>Roaring</h4><p>以65535bit分bucket，每个bucket里的integer共享高16bit（为bucket的编号），例如第一个bucket为[0 ~ 65535]，高16bit为0，第二个bucket为[65536 ~ 65536*2 - 1]，高16bit为1。其中，65536中以short integer(16bit)为单位表示integer的低16bit。所以当这个bucket中integer 个数 &gt; 4096时，不存在压缩。</p>
+<hr>
+<h2 id="RoaringBitmap源码解读"><a href="#RoaringBitmap源码解读" class="headerlink" title="RoaringBitmap源码解读"></a>RoaringBitmap源码解读</h2><p>RoaringBitmap的基本构成如下:HighLowContainer中存储了每个Integer的高16bit的公共索引keys以及具体存储数字的Container。由于Container是最终的载体，所以优化基本都在Container里。下面直接分析源码中的Add方法，通过这个方法基本上可以看出Container的内部结构。<br><img src="http://liaojiayi.com/assets/RoaringBitmap_basic.png" alt="RoaringBasic"><br>先看一个代码里比较常出现的binarySearch方法，这里比较灵活的一点是，如果找到则返回对应的index，如果没找到则返回对应位置的负数，这样既可以传递位置信息，又可以传递是否存在的信息。<br><figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">int</span> hybridUnsignedBinarySearch(<span class="keyword">final</span> short[] array, <span class="keyword">final</span> <span class="keyword">int</span> <span class="keyword">begin</span>,</span><br><span class="line">      <span class="keyword">final</span> <span class="keyword">int</span> <span class="keyword">end</span>, <span class="keyword">final</span> short k) &#123;</span><br><span class="line">    <span class="keyword">int</span> ikey = toIntUnsigned(k);</span><br><span class="line">    <span class="comment">// next line accelerates the possibly common case where the value would</span></span><br><span class="line">    <span class="comment">// be inserted at the end</span></span><br><span class="line">    <span class="keyword">if</span> ((<span class="keyword">end</span> &gt; <span class="number">0</span>) &amp;&amp; (toIntUnsigned(array[<span class="keyword">end</span> - <span class="number">1</span>]) &lt; ikey)) &#123;</span><br><span class="line">      <span class="keyword">return</span> -<span class="keyword">end</span> - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> low = <span class="keyword">begin</span>;</span><br><span class="line">    <span class="keyword">int</span> high = <span class="keyword">end</span> - <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 32 in the next line matches the size of a cache line</span></span><br><span class="line">    <span class="keyword">while</span> (low + <span class="number">32</span> &lt;= high) &#123;</span><br><span class="line">      <span class="keyword">final</span> <span class="keyword">int</span> middleIndex = (low + high) &gt;&gt;&gt; <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">final</span> <span class="keyword">int</span> middleValue = toIntUnsigned(array[middleIndex]);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (middleValue &lt; ikey) &#123;</span><br><span class="line">        low = middleIndex + <span class="number">1</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (middleValue &gt; ikey) &#123;</span><br><span class="line">        high = middleIndex - <span class="number">1</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> middleIndex;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// we finish the job with a sequential search</span></span><br><span class="line">    <span class="keyword">int</span> x = low;</span><br><span class="line">    <span class="keyword">for</span> (; x &lt;= high; ++x) &#123;</span><br><span class="line">      <span class="keyword">final</span> <span class="keyword">int</span> val = toIntUnsigned(array[x]);</span><br><span class="line">      <span class="keyword">if</span> (val &gt;= ikey) &#123;</span><br><span class="line">        <span class="keyword">if</span> (val == ikey) &#123;</span><br><span class="line">          <span class="keyword">return</span> x;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -(x + <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="ArrayContainer"><a href="#ArrayContainer" class="headerlink" title="ArrayContainer"></a>ArrayContainer</h4><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">short[] content;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> Container add(<span class="keyword">final</span> short x) &#123;</span><br><span class="line">    int loc = Util.unsignedBinarySearch(content, <span class="number">0</span>, cardinality, x);</span><br><span class="line">    <span class="keyword">if</span> (loc &lt; <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="comment">// Transform the ArrayContainer to a BitmapContainer</span></span><br><span class="line">      <span class="comment">// when cardinality = DEFAULT_MAX_SIZE</span></span><br><span class="line">      <span class="keyword">if</span> (cardinality &gt;= DEFAULT_MAX_SIZE) &#123;</span><br><span class="line">        BitmapContainer a = <span class="keyword">this</span>.toBitmapContainer();</span><br><span class="line">        a.add(x);</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (cardinality &gt;= <span class="keyword">this</span>.content.length) &#123;</span><br><span class="line">        increaseCapacity();</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// insertion : shift the elements &gt; x by one position to</span></span><br><span class="line">      <span class="comment">// the right</span></span><br><span class="line">      <span class="comment">// and put x in it's appropriate place</span></span><br><span class="line">      System.arraycopy(content, -loc - <span class="number">1</span>, content, -loc, cardinality + loc + <span class="number">1</span>);</span><br><span class="line">      content[-loc - <span class="number">1</span>] = x;</span><br><span class="line">      ++cardinality;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>相关变量说明：</p>
+<ul>
+<li>content: 为了增删改查的方便性，采用short有序数组来存储数字(注意高16bit已经存储在HighLowContainer中，所以这里只需要存储低16bit的short就满足了)。</li>
+<li>DEFAULT_MAX_SIZE: 由于有序数组在插入时需要做二分查找，效率较低，所以这里有一个限定4096，超过这个大小自动转成BitmapContainer。</li>
+</ul>
+<p><strong>add</strong>流程如下：</p>
+<ol>
+<li>通过二分查找找到x所在的content中的位置，若存在则不处理，不存在则进入下一步。</li>
+<li>对cardinality进行判断，决定是否需要升级Container或者扩容。</li>
+<li>将content中loc之后的子数组后移一位，将数据插入，形成新的content数组。<h4 id="BitmapContainer"><a href="#BitmapContainer" class="headerlink" title="BitmapContainer"></a>BitmapContainer</h4></li>
+</ol>
+<figure class="highlight aspectj"><table><tr><td class="code"><pre><span class="line"><span class="keyword">final</span> <span class="keyword">long</span>[] bitmap;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="function">Container <span class="title">add</span><span class="params">(<span class="keyword">final</span> <span class="keyword">short</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> x = Util.toIntUnsigned(i);</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">long</span> previous = bitmap[x / <span class="number">64</span>];</span><br><span class="line">    <span class="keyword">long</span> newval = previous | (<span class="number">1</span>L &lt;&lt; x);</span><br><span class="line">    bitmap[x / <span class="number">64</span>] = newval;</span><br><span class="line">    <span class="keyword">if</span> (USE_BRANCHLESS) &#123;</span><br><span class="line">      cardinality += (previous ^ newval) &gt;&gt;&gt; x;</span><br><span class="line">    &#125; <span class="function"><span class="keyword">else</span> <span class="title">if</span> <span class="params">(previous != newval)</span> </span>&#123;</span><br><span class="line">      ++cardinality;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>相关变量说明：</p>
+<ul>
+<li>bitmap: 1个Container中可以存储65536(2^16bit)个数字Integer，在BitmapContainer中再以long(2^6bit)做分组，形成了long数组。</li>
+</ul>
+<p><strong>add</strong>流程如下:</p>
+<ol>
+<li>通过x/64找到bitmap中的long数组中的位置得到原值previous。</li>
+<li>previous | (1L &lt;&lt; x) 得到newval。</li>
+<li>改变cardinality。<br>可以发现当Integer分布稠密时，容易在一个long中出现连续1的情况，在这种情况下也存在优化空间，可以调用runOptimize升级为RunContainer。</li>
+</ol>
+<h4 id="RunContainer"><a href="#RunContainer" class="headerlink" title="RunContainer"></a>RunContainer</h4><p>主要解决了连续1的情况，例如15、16、17、18可以被优化成15,3。RunContainer中有两个关键变量，valueslength的2n位是具体数值，例如15，2n+1为连续Integer的个数，例如3；nbrruns为valueslength/2被优化的次数。</p>
+<figure class="highlight cs"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">short</span>[] valueslength;</span><br><span class="line"><span class="keyword">int</span> nbrruns = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">**<span class="keyword">add</span>**方法:</span><br></pre></td></tr></table></figure>
+<p>@Override<br>public Container add(short k) {<br>    // TODO: it might be better and simpler to do return<br>    // toBitmapOrArrayContainer(getCardinality()).add(k)<br>    // but note that some unit tests use this method to build up test runcontainers without calling<br>    // runOptimize<br>    int index = unsignedInterleavedBinarySearch(valueslength, 0, nbrruns, k);<br>    if (index &gt;= 0) {<br>      return this;// already there<br>    }<br>    index = -index - 2;// points to preceding value, possibly -1<br>    if (index &gt;= 0)   {// possible match<br>      int offset = toIntUnsigned(k) - toIntUnsigned(getValue(index));<br>      int le = toIntUnsigned(getLength(index));<br>      if (offset &lt;= le) {<br>        return this;<br>      }<br>      if (offset == le + 1) {<br>        // we may need to fuse<br>        if (index + 1 &lt; nbrruns) {<br>          if (toIntUnsigned(getValue(index + 1)) == toIntUnsigned(k) + 1) {<br>            // indeed fusion is needed<br>            setLength(index,<br>                (short) (getValue(index + 1) + getLength(index + 1) - getValue(index)));<br>            recoverRoomAtIndex(index + 1);<br>            return this;<br>          }<br>        }<br>        incrementLength(index);<br>        return this;<br>      }<br>      if (index + 1 &lt; nbrruns) {<br>        // we may need to fuse<br>        if (toIntUnsigned(getValue(index + 1)) == toIntUnsigned(k) + 1) {<br>          // indeed fusion is needed<br>          setValue(index + 1, k);<br>          setLength(index + 1, (short) (getLength(index + 1) + 1));<br>          return this;<br>        }<br>      }<br>    }<br>    if (index == -1) {<br>      // we may need to extend the first run<br>      if (0 &lt; nbrruns) {<br>        if (getValue(0) == k + 1) {<br>          incrementLength(0);<br>          decrementValue(0);<br>          return this;<br>        }<br>      }<br>    }<br>    makeRoomAtIndex(index + 1);<br>    setValue(index + 1, k);<br>    setLength(index + 1, (short) 0);<br>    return this;<br>}<br><code>`</code></p>
+<p>这里的决策方法略为复杂，用流程图来表示应该会比较直观。<br><img src="http://liaojiayi.com/assets/RunContainerFlow.png" alt="FLOW"><br>Container之间比较如下：</p>
+<table>
+<thead>
+<tr>
+<th>Container</th>
+<th style="text-align:center">空间利用率</th>
+<th style="text-align:right">查询效率 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ArrayContainer</td>
+<td style="text-align:center">无压缩、低</td>
+<td style="text-align:right">使用二分查找，低</td>
+</tr>
+<tr>
+<td>BitmapContainer</td>
+<td style="text-align:center">无压缩、低</td>
+<td style="text-align:right">直接利用索引命中，高</td>
+</tr>
+<tr>
+<td>RunContainer</td>
+<td style="text-align:center">有压缩、高</td>
+<td style="text-align:right">顺序查找，中</td>
+</tr>
+</tbody>
+</table>
+
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2018-07-06T08:46:00.000Z" itemprop="datePublished">
+              2018-07-06
+            </time>
+          </div>
+          
+            <div>
+              tags: 
+  <li class="meta-text">
+  { <a href="/tags/Bitmap/">Bitmap</a> }
+  </li>
+
+
+            </div>
+          
+      </section>
+    
+
+
+
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2018 - Liao Jiayi </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+<script src="/js/pager/dist/singlepager.js"></script>
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>
