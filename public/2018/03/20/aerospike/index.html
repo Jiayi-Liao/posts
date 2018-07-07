@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Aerospike学习笔记 | W - 廖嘉逸</title>
+  <title>Aerospike学习笔记 | Developer - 廖嘉逸</title>
   <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
   <script src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
@@ -19,6 +19,7 @@
   </script>
 
   
+  
   <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
   <link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
   <link rel="stylesheet" href="/css/style.css">
@@ -28,19 +29,41 @@
 <div class="Shell">
     <aside class='SideBar'>
     <section class='avatar' style="background-image: url()">
-        <div class='av-pic' style="background-image: url()">
+        <div class='av-pic' style="background-image: url(/assets/avatar.jpg)">
         </div>
     </section>
     <section class='menu'>
-        <div>W - 廖嘉逸</div>
+        <div>Developer - 廖嘉逸</div>
         
             <div>Liao Jiayi</div>
         
         <ul>
           
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/about/" class="Btn">
+              <li>About</li>
+            </a>  
+          
         </ul>
     </section>
     <section class="media">
+        
+            
+                <a href="https://github.com/buptljy">
+                    <img src="/assets/github.svg" />
+                </a>
+            
         
     </section>
 </aside>
@@ -148,6 +171,24 @@
       </section>
     
 
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <script>
+        var gitment = new Gitment({
+	    id: 'aerospike',
+            owner: 'buptljy',
+            repo: 'blog-project',
+            oauth: {
+                client_id: 'ba3678010728699dcb1c',
+                client_secret: '559aec5ee68930b3582de402ad0bdb9c40fa6b4a',
+            },
+        })
+        gitment.render('comments')
+    </script>
+</section>
 
 
 </article>

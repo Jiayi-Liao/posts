@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Bitmap的小研究 | W - 廖嘉逸</title>
+  <title>Bitmap的小研究 | Developer - 廖嘉逸</title>
   <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
   <script src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
@@ -19,6 +19,7 @@
   </script>
 
   
+  
   <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
   <link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
   <link rel="stylesheet" href="/css/style.css">
@@ -28,19 +29,41 @@
 <div class="Shell">
     <aside class='SideBar'>
     <section class='avatar' style="background-image: url()">
-        <div class='av-pic' style="background-image: url()">
+        <div class='av-pic' style="background-image: url(/assets/avatar.jpg)">
         </div>
     </section>
     <section class='menu'>
-        <div>W - 廖嘉逸</div>
+        <div>Developer - 廖嘉逸</div>
         
             <div>Liao Jiayi</div>
         
         <ul>
           
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+            <a href="/tags/" class="Btn">
+              <li>Tags</li>
+            </a>  
+          
+            <a href="/about/" class="Btn">
+              <li>About</li>
+            </a>  
+          
         </ul>
     </section>
     <section class="media">
+        
+            
+                <a href="https://github.com/buptljy">
+                    <img src="/assets/github.svg" />
+                </a>
+            
         
     </section>
 </aside>
@@ -73,9 +96,9 @@
 <ol>
 <li>通过二分查找找到x所在的content中的位置，若存在则不处理，不存在则进入下一步。</li>
 <li>对cardinality进行判断，决定是否需要升级Container或者扩容。</li>
-<li>将content中loc之后的子数组后移一位，将数据插入，形成新的content数组。<h4 id="BitmapContainer"><a href="#BitmapContainer" class="headerlink" title="BitmapContainer"></a>BitmapContainer</h4></li>
+<li>将content中loc之后的子数组后移一位，将数据插入，形成新的content数组。</li>
 </ol>
-<figure class="highlight aspectj"><table><tr><td class="code"><pre><span class="line"><span class="keyword">final</span> <span class="keyword">long</span>[] bitmap;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="function">Container <span class="title">add</span><span class="params">(<span class="keyword">final</span> <span class="keyword">short</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> x = Util.toIntUnsigned(i);</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">long</span> previous = bitmap[x / <span class="number">64</span>];</span><br><span class="line">    <span class="keyword">long</span> newval = previous | (<span class="number">1</span>L &lt;&lt; x);</span><br><span class="line">    bitmap[x / <span class="number">64</span>] = newval;</span><br><span class="line">    <span class="keyword">if</span> (USE_BRANCHLESS) &#123;</span><br><span class="line">      cardinality += (previous ^ newval) &gt;&gt;&gt; x;</span><br><span class="line">    &#125; <span class="function"><span class="keyword">else</span> <span class="title">if</span> <span class="params">(previous != newval)</span> </span>&#123;</span><br><span class="line">      ++cardinality;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="BitmapContainer"><a href="#BitmapContainer" class="headerlink" title="BitmapContainer"></a>BitmapContainer</h4><figure class="highlight aspectj"><table><tr><td class="code"><pre><span class="line"><span class="keyword">final</span> <span class="keyword">long</span>[] bitmap;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="function">Container <span class="title">add</span><span class="params">(<span class="keyword">final</span> <span class="keyword">short</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> x = Util.toIntUnsigned(i);</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">long</span> previous = bitmap[x / <span class="number">64</span>];</span><br><span class="line">    <span class="keyword">long</span> newval = previous | (<span class="number">1</span>L &lt;&lt; x);</span><br><span class="line">    bitmap[x / <span class="number">64</span>] = newval;</span><br><span class="line">    <span class="keyword">if</span> (USE_BRANCHLESS) &#123;</span><br><span class="line">      cardinality += (previous ^ newval) &gt;&gt;&gt; x;</span><br><span class="line">    &#125; <span class="function"><span class="keyword">else</span> <span class="title">if</span> <span class="params">(previous != newval)</span> </span>&#123;</span><br><span class="line">      ++cardinality;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>相关变量说明：</p>
 <ul>
 <li>bitmap: 1个Container中可以存储65536(2^16bit)个数字Integer，在BitmapContainer中再以long(2^6bit)做分组，形成了long数组。</li>
@@ -87,8 +110,9 @@
 <li>改变cardinality。<br>可以发现当Integer分布稠密时，容易在一个long中出现连续1的情况，在这种情况下也存在优化空间，可以调用runOptimize升级为RunContainer。</li>
 </ol>
 <h4 id="RunContainer"><a href="#RunContainer" class="headerlink" title="RunContainer"></a>RunContainer</h4><p>主要解决了连续1的情况，例如15、16、17、18可以被优化成15,3。RunContainer中有两个关键变量，valueslength的2n位是具体数值，例如15，2n+1为连续Integer的个数，例如3；nbrruns为valueslength/2被优化的次数。</p>
-<figure class="highlight cs"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">short</span>[] valueslength;</span><br><span class="line"><span class="keyword">int</span> nbrruns = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">**<span class="keyword">add</span>**方法:</span><br></pre></td></tr></table></figure>
-<p>@Override<br>public Container add(short k) {<br>    // TODO: it might be better and simpler to do return<br>    // toBitmapOrArrayContainer(getCardinality()).add(k)<br>    // but note that some unit tests use this method to build up test runcontainers without calling<br>    // runOptimize<br>    int index = unsignedInterleavedBinarySearch(valueslength, 0, nbrruns, k);<br>    if (index &gt;= 0) {<br>      return this;// already there<br>    }<br>    index = -index - 2;// points to preceding value, possibly -1<br>    if (index &gt;= 0)   {// possible match<br>      int offset = toIntUnsigned(k) - toIntUnsigned(getValue(index));<br>      int le = toIntUnsigned(getLength(index));<br>      if (offset &lt;= le) {<br>        return this;<br>      }<br>      if (offset == le + 1) {<br>        // we may need to fuse<br>        if (index + 1 &lt; nbrruns) {<br>          if (toIntUnsigned(getValue(index + 1)) == toIntUnsigned(k) + 1) {<br>            // indeed fusion is needed<br>            setLength(index,<br>                (short) (getValue(index + 1) + getLength(index + 1) - getValue(index)));<br>            recoverRoomAtIndex(index + 1);<br>            return this;<br>          }<br>        }<br>        incrementLength(index);<br>        return this;<br>      }<br>      if (index + 1 &lt; nbrruns) {<br>        // we may need to fuse<br>        if (toIntUnsigned(getValue(index + 1)) == toIntUnsigned(k) + 1) {<br>          // indeed fusion is needed<br>          setValue(index + 1, k);<br>          setLength(index + 1, (short) (getLength(index + 1) + 1));<br>          return this;<br>        }<br>      }<br>    }<br>    if (index == -1) {<br>      // we may need to extend the first run<br>      if (0 &lt; nbrruns) {<br>        if (getValue(0) == k + 1) {<br>          incrementLength(0);<br>          decrementValue(0);<br>          return this;<br>        }<br>      }<br>    }<br>    makeRoomAtIndex(index + 1);<br>    setValue(index + 1, k);<br>    setLength(index + 1, (short) 0);<br>    return this;<br>}<br><code>`</code></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">short</span>[] valueslength;</span><br><span class="line"><span class="keyword">int</span> nbrruns = <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+<p>add方法如下所示:</p>
+<figure class="highlight axapta"><table><tr><td class="code"><pre><span class="line">@Override</span><br><span class="line"><span class="keyword">public</span> Container add(<span class="keyword">short</span> k) &#123;</span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> it might be better and simpler to do return</span></span><br><span class="line">    <span class="comment">// toBitmapOrArrayContainer(getCardinality()).add(k)</span></span><br><span class="line">    <span class="comment">// but note that some unit tests use this method to build up test runcontainers without calling</span></span><br><span class="line">    <span class="comment">// runOptimize</span></span><br><span class="line">    <span class="keyword">int</span> <span class="keyword">index</span> = unsignedInterleavedBinarySearch(valueslength, <span class="number">0</span>, nbrruns, k);</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">index</span> &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>;<span class="comment">// already there</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">index</span> = -<span class="keyword">index</span> - <span class="number">2</span>;<span class="comment">// points to preceding value, possibly -1</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">index</span> &gt;= <span class="number">0</span>)   &#123;<span class="comment">// possible match</span></span><br><span class="line">      <span class="keyword">int</span> offset = toIntUnsigned(k) - toIntUnsigned(getValue(<span class="keyword">index</span>));</span><br><span class="line">      <span class="keyword">int</span> le = toIntUnsigned(getLength(<span class="keyword">index</span>));</span><br><span class="line">      <span class="keyword">if</span> (offset &lt;= le) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (offset == le + <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="comment">// we may need to fuse</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">index</span> + <span class="number">1</span> &lt; nbrruns) &#123;</span><br><span class="line">          <span class="keyword">if</span> (toIntUnsigned(getValue(<span class="keyword">index</span> + <span class="number">1</span>)) == toIntUnsigned(k) + <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="comment">// indeed fusion is needed</span></span><br><span class="line">            setLength(<span class="keyword">index</span>,</span><br><span class="line">                (<span class="keyword">short</span>) (getValue(<span class="keyword">index</span> + <span class="number">1</span>) + getLength(<span class="keyword">index</span> + <span class="number">1</span>) - getValue(<span class="keyword">index</span>)));</span><br><span class="line">            recoverRoomAtIndex(<span class="keyword">index</span> + <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        incrementLength(<span class="keyword">index</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">index</span> + <span class="number">1</span> &lt; nbrruns) &#123;</span><br><span class="line">        <span class="comment">// we may need to fuse</span></span><br><span class="line">        <span class="keyword">if</span> (toIntUnsigned(getValue(<span class="keyword">index</span> + <span class="number">1</span>)) == toIntUnsigned(k) + <span class="number">1</span>) &#123;</span><br><span class="line">          <span class="comment">// indeed fusion is needed</span></span><br><span class="line">          setValue(<span class="keyword">index</span> + <span class="number">1</span>, k);</span><br><span class="line">          setLength(<span class="keyword">index</span> + <span class="number">1</span>, (<span class="keyword">short</span>) (getLength(<span class="keyword">index</span> + <span class="number">1</span>) + <span class="number">1</span>));</span><br><span class="line">          <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">index</span> == <span class="number">-1</span>) &#123;</span><br><span class="line">      <span class="comment">// we may need to extend the first run</span></span><br><span class="line">      <span class="keyword">if</span> (<span class="number">0</span> &lt; nbrruns) &#123;</span><br><span class="line">        <span class="keyword">if</span> (getValue(<span class="number">0</span>) == k + <span class="number">1</span>) &#123;</span><br><span class="line">          incrementLength(<span class="number">0</span>);</span><br><span class="line">          decrementValue(<span class="number">0</span>);</span><br><span class="line">          <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    makeRoomAtIndex(<span class="keyword">index</span> + <span class="number">1</span>);</span><br><span class="line">    setValue(<span class="keyword">index</span> + <span class="number">1</span>, k);</span><br><span class="line">    setLength(<span class="keyword">index</span> + <span class="number">1</span>, (<span class="keyword">short</span>) <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这里的决策方法略为复杂，用流程图来表示应该会比较直观。<br><img src="http://liaojiayi.com/assets/RunContainerFlow.png" alt="FLOW"><br>Container之间比较如下：</p>
 <table>
 <thead>
@@ -142,6 +166,24 @@
       </section>
     
 
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <script>
+        var gitment = new Gitment({
+	    id: 'bitmap',
+            owner: 'buptljy',
+            repo: 'blog-project',
+            oauth: {
+                client_id: 'ba3678010728699dcb1c',
+                client_secret: '559aec5ee68930b3582de402ad0bdb9c40fa6b4a',
+            },
+        })
+        gitment.render('comments')
+    </script>
+</section>
 
 
 </article>
