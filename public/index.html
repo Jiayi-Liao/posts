@@ -1,174 +1,501 @@
 <!DOCTYPE html>
-<html lang="zh-cmn-Hans">
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Developer - 廖嘉逸</title>
-  <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-  <script src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  <script>
-  var _hmt = _hmt || [];
-  (function() {
-    var hm = document.createElement("script");
-    hm.src = "https://hm.baidu.com/hm.js?f338e6e48171cfc763820c8cbdff7286";
-    var s = document.getElementsByTagName("script")[0]; 
-    s.parentNode.insertBefore(hm, s);
-  })();
-  </script>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   
   
-  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
-  <link rel="stylesheet" href="/css/style.css">
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Liaojiayi,Blog,Data" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Never give up chasing the wind.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Developer - 廖嘉逸">
+<meta property="og:url" content="http://www.liaojiayi.com/index.html">
+<meta property="og:site_name" content="Developer - 廖嘉逸">
+<meta property="og:description" content="Never give up chasing the wind.">
+<meta property="og:locale" content="zh-Hans">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Developer - 廖嘉逸">
+<meta name="twitter:description" content="Never give up chasing the wind.">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.liaojiayi.com/"/>
+
+
+
+
+
+  <title>Developer - 廖嘉逸</title>
+  
+
+
+
+
+
+
+
+
 </head>
 
-<body>
-<div class="Shell">
-    <aside class='SideBar'>
-    <section class='avatar' style="background-image: url()">
-        <div class='av-pic' style="background-image: url(/assets/avatar.jpg)">
-        </div>
-    </section>
-    <section class='menu'>
-        <div>Developer - 廖嘉逸</div>
-        
-            <div>Liao Jiayi</div>
-        
-        <ul>
-          
-            <a href="/" class="Btn">
-              <li>Home</li>
-            </a>  
-          
-            <a href="/archives/" class="Btn">
-              <li>Archive</li>
-            </a>  
-          
-            <a href="/tags/" class="Btn">
-              <li>Tags</li>
-            </a>  
-          
-            <a href="/about/" class="Btn">
-              <li>About</li>
-            </a>  
-          
-        </ul>
-    </section>
-    <section class="media">
-        
-            
-                <a href="https://github.com/buptljy">
-                    <img src="/assets/github.svg" />
-                </a>
-            
-        
-    </section>
-</aside>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-    <div class="container">
-        <div data-pager-shell>
-            <ul class="Index">
   
   
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2018/07/06/bitmap/">Bitmap的小研究</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2018-07-06T08:46:00.000Z" itemprop="datePublished">
-    2018-07-06
-  </time>
-  
-  | 
-  <ul>
     
-  <li class="meta-text">
-  { <a href="/tags/Bitmap/">Bitmap</a> }
-  </li>
-
-
-  </ul>
   
-  
-  / 
-  <ul>
+
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
     
-  <li class="meta-text">
-  { <a href="/categories/bitmap/">bitmap</a> }
-  </li>
 
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Developer - 廖嘉逸</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">Liao Jiayi</h1>
+      
+  </div>
 
-  </ul>
-  
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
-    </header>
-    <div>
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
       
-        <p><strong>Paper原文地址</strong>：<a href="http://db.ucsd.edu/wp-content/uploads/2017/03/sidm338-wangA.pdf" target="_blank" rel="noopener">An Experimental Study of Bitmap Compression vs.<br>Inverted List Compression</a><br>Bitmap可以说是一个很万能的存储了，无论是空间消耗，还是查询响应，在最佳实践下，都可以达到很好的效果。最近做了不少Bitmap的研究，简单的基于上面的Paper去做一个记录。</p>
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.liaojiayi.com/2018/07/06/bitmap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liao Jiayi">
+      <meta itemprop="description" content="Carpe Diem.">
+      <meta itemprop="image" content="/assets/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Developer - 廖嘉逸">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/06/bitmap/" itemprop="url">Bitmap的小研究</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-06T16:46:00+08:00">
+                2018-07-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bitmap/" itemprop="url" rel="index">
+                    <span itemprop="name">bitmap</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><strong>Paper原文地址</strong>：<a href="http://db.ucsd.edu/wp-content/uploads/2017/03/sidm338-wangA.pdf" target="_blank" rel="noopener">An Experimental Study of Bitmap Compression vs.<br>Inverted List Compression</a><br>Bitmap可以说是一个很万能的存储了，无论是空间消耗，还是查询响应，在最佳实践下，都可以达到很好的效果。最近做了不少Bitmap的研究，简单的基于上面的Paper去做一个记录。</p>
 <hr>
 <h2 id="History"><a href="#History" class="headerlink" title="History"></a>History</h2><p>从最原始的Bitmap到RoaringBitmap（可能是目前大多数场景的最佳选择？），虽然仔细研究Roaring的原理并不复杂，但也是经过了十几年的变化和迭代。  </p>
 <h4 id="WAH-Word-Aligned-Hybrid"><a href="#WAH-Word-Aligned-Hybrid" class="headerlink" title="WAH(Word Aligned Hybrid)"></a>WAH(Word Aligned Hybrid)</h4><p>这个算法只压缩全0或者全1的group。将所有bits按照连续的31bit进行分组，然后对每一组进行编码，编码后的长度为32bit。具体结构如下图所示：<br><img src="http://liaojiayi.com/assets/WAH.png" alt="WAH"></p>
 <h4 id="EWAH-Enhanced-Word-Aligned-Hybrid"><a href="#EWAH-Enhanced-Word-Aligned-Hybrid" class="headerlink" title="EWAH(Enhanced Word Aligned Hybrid)"></a>EWAH(Enhanced Word Aligned Hybrid)</h4><p>基于WAH加了一个Header，作为元信息的存储。我理解这其实并没有在存储上做到太多帮助的优化，反而是在查询或者插入中，会更加便捷。Header结构如下所示。<br><img src="http://liaojiayi.com/assets/EWAH.png" alt="EWAH"></p>
 <h4 id="CONCISE-Compressed-N-Composble-Integer-Set"><a href="#CONCISE-Compressed-N-Composble-Integer-Set" class="headerlink" title="CONCISE(Compressed N Composble Integer Set)"></a>CONCISE(Compressed N Composble Integer Set)</h4><p>这也是基于WAH做的一个优化。在WAH算法中，只要有一个bit被置1，那么整个group都无法被压缩，这一算法在这种odd bit上做了优化。记录了这个单一odd bit的位置。<br><img src="http://liaojiayi.com/assets/CONCISE.png" alt="CONCISE"></p>
-        
-          <div class="more-link">
-            <a href="/2018/07/06/bitmap/#more">Read On »</a>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/06/bitmap/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2018/06/03/aerospike-write/">Aerospike笔记（二）- 写机制</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2018-06-03T07:21:29.000Z" itemprop="datePublished">
-    2018-06-03
-  </time>
-  
-  | 
-  <ul>
     
-  <li class="meta-text">
-  { <a href="/tags/Aerospike/">Aerospike</a> }
-  </li>
-
-
-  </ul>
-  
-  
-  / 
-  <ul>
     
-  <li class="meta-text">
-  { <a href="/categories/aerospike/">aerospike</a> }
-  </li>
+    
 
+    
 
-  </ul>
-  
-</div>
+    
 
-    </header>
-    <div>
+    
+
+    <footer class="post-footer">
       
-        <p>最近使用Aerospike遇到了不少的问题，在不断地看日志，读源码，阅读<a href="https://discuss.aerospike.com/t/device-overload-when-map-size-is-too-big/5206" target="_blank" rel="noopener">Aerospike社区</a>的各种文章之后，也算是对Aerospike有了一些更深的了解。</p>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.liaojiayi.com/2018/06/03/aerospike-write/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liao Jiayi">
+      <meta itemprop="description" content="Carpe Diem.">
+      <meta itemprop="image" content="/assets/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Developer - 廖嘉逸">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/03/aerospike-write/" itemprop="url">Aerospike笔记（二）- 写机制</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-03T15:21:29+08:00">
+                2018-06-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/aerospike/" itemprop="url" rel="index">
+                    <span itemprop="name">aerospike</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>最近使用Aerospike遇到了不少的问题，在不断地看日志，读源码，阅读<a href="https://discuss.aerospike.com/t/device-overload-when-map-size-is-too-big/5206" target="_blank" rel="noopener">Aerospike社区</a>的各种文章之后，也算是对Aerospike有了一些更深的了解。</p>
 <h4 id="Storage-Layout"><a href="#Storage-Layout" class="headerlink" title="Storage Layout"></a>Storage Layout</h4><p><img src="http://liaojiayi.com/assets/aerospike0.png" alt="Storage Layout"><br>SSD namespace的写流程基本如上图所示，现在，让我们假设有一个写操作<strong><em>MapOperation.PUT</em></strong>正在进行，它的路径将会是这样：  </p>
 <ol>
 <li>根据<strong>MapOperation.PUT</strong>的各种参数和策略，来校验Metadata，例如namespace、set是否存在，然后写入到最小写单元block5中。  </li>
@@ -188,51 +515,130 @@
 </ul>
 <hr>
 <h4 id="Log-Inspection"><a href="#Log-Inspection" class="headerlink" title="Log Inspection"></a>Log Inspection</h4>
-        
-          <div class="more-link">
-            <a href="/2018/06/03/aerospike-write/#more">Read On »</a>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/06/03/aerospike-write/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2018/04/11/hs-err-pid-log/">hs_err_pid.log里是些什么？</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2018-04-11T12:28:03.000Z" itemprop="datePublished">
-    2018-04-11
-  </time>
-  
-  | 
-  <ul>
     
-  <li class="meta-text">
-  { <a href="/tags/memory/">memory</a> }
-  </li>
+    
+    
 
-  <li class="meta-text">
-  { <a href="/tags/linux/">linux</a> }
-  </li>
+    
 
+    
 
-  </ul>
-  
-  
-</div>
+    
 
-    </header>
-    <div>
+    <footer class="post-footer">
       
-        <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> There is insufficient memory <span class="keyword">for</span> the Java Runtime Environment to <span class="built_in">continue</span>.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Native memory allocation (mmap) failed to map 12288 bytes <span class="keyword">for</span> committing reserved memory.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Possible reasons:</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   The system is out of physical RAM or swap space</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   In 32 bit mode, the process size <span class="built_in">limit</span> was hit</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Possible solutions:</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   Reduce memory load on the system</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   Increase physical memory or swap space</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   Check <span class="keyword">if</span> swap backing store is full</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   Use 64 bit Java on a 64 bit OS</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   Decrease Java heap size (-Xmx/-Xms)</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   Decrease number of Java threads</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   Decrease Java thread stack sizes (-Xss)</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   Set larger code cache with -XX:ReservedCodeCacheSize=</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> This output file may be truncated or incomplete.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="meta">#</span><span class="bash">  Out of Memory Error (os_linux.cpp:2673), pid=13016, tid=140682742126336</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> JRE version: Java(TM) SE Runtime Environment (8.0_40-b25) (build 1.8.0_40-b25)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Java VM: Java HotSpot(TM) 64-Bit Server VM (25.40-b25 mixed mode linux-amd64 compressed oops)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Failed to write core dump. Core dumps have been disabled. To <span class="built_in">enable</span> core dumping, try <span class="string">"ulimit -c unlimited"</span> before starting Java again</span></span><br></pre></td></tr></table></figure>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.liaojiayi.com/2018/04/11/hs-err-pid-log/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liao Jiayi">
+      <meta itemprop="description" content="Carpe Diem.">
+      <meta itemprop="image" content="/assets/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Developer - 廖嘉逸">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/11/hs-err-pid-log/" itemprop="url">hs_err_pid.log里是些什么？</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-11T20:28:03+08:00">
+                2018-04-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> There is insufficient memory <span class="keyword">for</span> the Java Runtime Environment to <span class="built_in">continue</span>.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Native memory allocation (mmap) failed to map 12288 bytes <span class="keyword">for</span> committing reserved memory.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Possible reasons:</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   The system is out of physical RAM or swap space</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   In 32 bit mode, the process size <span class="built_in">limit</span> was hit</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Possible solutions:</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   Reduce memory load on the system</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   Increase physical memory or swap space</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   Check <span class="keyword">if</span> swap backing store is full</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   Use 64 bit Java on a 64 bit OS</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   Decrease Java heap size (-Xmx/-Xms)</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   Decrease number of Java threads</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   Decrease Java thread stack sizes (-Xss)</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   Set larger code cache with -XX:ReservedCodeCacheSize=</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> This output file may be truncated or incomplete.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="meta">#</span><span class="bash">  Out of Memory Error (os_linux.cpp:2673), pid=13016, tid=140682742126336</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> JRE version: Java(TM) SE Runtime Environment (8.0_40-b25) (build 1.8.0_40-b25)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Java VM: Java HotSpot(TM) 64-Bit Server VM (25.40-b25 mixed mode linux-amd64 compressed oops)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Failed to write core dump. Core dumps have been disabled. To <span class="built_in">enable</span> core dumping, try <span class="string">"ulimit -c unlimited"</span> before starting Java again</span></span><br></pre></td></tr></table></figure>
 <p>第一部分主要是程序crash的原因以及相关的solution。<br><figure class="highlight x86asm"><table><tr><td class="code"><pre><span class="line">Current thread (<span class="number">0x00007ff2d8001000</span>):  JavaThread <span class="string">"flink-akka.remote.default-remote-dispatcher-15"</span> daemon [_thread_new, id=<span class="number">31925</span>, stack(<span class="number">0x00007ff340ced000</span>,<span class="number">0x00007ff340dee000</span>)]</span><br><span class="line"></span><br><span class="line"><span class="symbol">Stack:</span> [<span class="number">0x00007ff340ced000</span>,<span class="number">0x00007ff340dee000</span>],  <span class="built_in">sp</span>=<span class="number">0x00007ff340dec9a0</span>,  free space=1022k</span><br><span class="line">Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)</span><br><span class="line">V  [libjvm.so+<span class="number">0xaaca9a</span>]  VMError::report_and_die()+<span class="number">0x2ba</span></span><br><span class="line">V  [libjvm.so+<span class="number">0x4f333b</span>]  report_vm_out_of_memory(char const*, <span class="keyword">int</span>, unsigned long, VMErrorType, char const*)+<span class="number">0x8b</span></span><br><span class="line">V  [libjvm.so+<span class="number">0x90e8c3</span>]  os::Linux::commit_memory_impl(char*, unsigned long, bool)+<span class="number">0x103</span></span><br><span class="line">V  [libjvm.so+<span class="number">0x90e98c</span>]  os::pd_commit_memory(char*, unsigned long, bool)+<span class="number">0xc</span></span><br><span class="line">V  [libjvm.so+<span class="number">0x90772a</span>]  os::commit_memory(char*, unsigned long, bool)+<span class="number">0x2a</span></span><br><span class="line">V  [libjvm.so+<span class="number">0x90c97f</span>]  os::pd_create_stack_guard_pages(char*, unsigned long)+<span class="number">0x7f</span></span><br><span class="line">V  [libjvm.so+<span class="number">0xa52b4e</span>]  JavaThread::create_stack_guard_pages()+<span class="number">0x5e</span></span><br><span class="line">V  [libjvm.so+<span class="number">0xa5c9b4</span>]  JavaThread::run()+<span class="number">0x34</span></span><br><span class="line">V  [libjvm.so+<span class="number">0x910ee8</span>]  java_start(Thread*)+<span class="number">0x108</span></span><br><span class="line">C  [libpthread.so<span class="meta">.0</span>+<span class="number">0x7dc5</span>]  start_thread+<span class="number">0xc5</span></span><br></pre></td></tr></table></figure><br>Current Thread表示crash时程序所处的线程。<br><strong>线程类别</strong>: JavaThread，共有以下几种</p>
 <ul>
 <li>JavaThread</li>
@@ -306,51 +712,130 @@
 <li>CodeCache是用来保存本地代码的，不属于PermGen。</li>
 </ul>
 <figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">Compilation <span class="keyword">events</span> (<span class="number">10</span> <span class="keyword">events</span>):</span><br><span class="line">GC Heap History (<span class="number">10</span> <span class="keyword">events</span>):</span><br><span class="line">Deoptimization <span class="keyword">events</span> (<span class="number">10</span> <span class="keyword">events</span>):</span><br><span class="line">Internal exceptions (<span class="number">10</span> <span class="keyword">events</span>):</span><br><span class="line">Events (<span class="number">10</span> <span class="keyword">events</span>):</span><br><span class="line">Dynamic libraries:</span><br></pre></td></tr></table></figure>
-        
-          <div class="more-link">
-            <a href="/2018/04/11/hs-err-pid-log/#more">Read On »</a>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/11/hs-err-pid-log/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2018/03/20/flink-exactly-once/">Flink的Exactly-Once</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2018-03-19T17:41:00.000Z" itemprop="datePublished">
-    2018-03-20
-  </time>
-  
-  | 
-  <ul>
     
-  <li class="meta-text">
-  { <a href="/tags/flink/">flink</a> }
-  </li>
+    
+    
 
-  <li class="meta-text">
-  { <a href="/tags/exactly-once/">exactly-once</a> }
-  </li>
+    
 
+    
 
-  </ul>
-  
-  
-</div>
+    
 
-    </header>
-    <div>
+    <footer class="post-footer">
       
-        <p><a href="https://flink.apache.org/features/2018/03/01/end-to-end-exactly-once-apache-flink.html" target="_blank" rel="noopener">Official Document</a></p>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.liaojiayi.com/2018/03/20/flink-exactly-once/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liao Jiayi">
+      <meta itemprop="description" content="Carpe Diem.">
+      <meta itemprop="image" content="/assets/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Developer - 廖嘉逸">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/20/flink-exactly-once/" itemprop="url">Flink的Exactly-Once</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-20T01:41:00+08:00">
+                2018-03-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><a href="https://flink.apache.org/features/2018/03/01/end-to-end-exactly-once-apache-flink.html" target="_blank" rel="noopener">Official Document</a></p>
 <h3 id="闲扯"><a href="#闲扯" class="headerlink" title="闲扯"></a>闲扯</h3><p>最近Spark2.3正式发布，流处理不再试Beta版，Spark的Structure Streaming几乎是拥有了Flink的所有功能，生态社区做得好就是不一样，Flink该加把劲了…</p>
 <hr>
 <h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>Exactly-once是一个经常提到的语义，也是程序开发中，需要尽可能做到的一个理想状态。这种语义其实放在分布式程序中有很多种理解，比如读取数据源Exactly-once，Process过程Exactly-once，存储数据Exactly-once，但我们常用的理解方式是End-to-end的语义，也就是说，每一个输入，只会影响一次输出。</p>
@@ -360,47 +845,130 @@
 <li>preCommit()</li>
 <li>commit()</li>
 </ol>
-        
-          <div class="more-link">
-            <a href="/2018/03/20/flink-exactly-once/#more">Read On »</a>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/20/flink-exactly-once/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
-</article>
-
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2018/03/20/aerospike/">Aerospike学习笔记</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2018-03-19T17:01:00.000Z" itemprop="datePublished">
-    2018-03-20
-  </time>
-  
-  | 
-  <ul>
     
-  <li class="meta-text">
-  { <a href="/tags/Aerospike/">Aerospike</a> }
-  </li>
+    
+    
 
+    
 
-  </ul>
-  
-  
-</div>
+    
 
-    </header>
-    <div>
+    
+
+    <footer class="post-footer">
       
-        <h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><p>在很多业务场景比如反欺诈、广告定向推荐、数字身份验证等，这些场景都有一些共同的特点： </p>
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.liaojiayi.com/2018/03/20/aerospike/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liao Jiayi">
+      <meta itemprop="description" content="Carpe Diem.">
+      <meta itemprop="image" content="/assets/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Developer - 廖嘉逸">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/20/aerospike/" itemprop="url">Aerospike学习笔记</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-20T01:01:00+08:00">
+                2018-03-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><p>在很多业务场景比如反欺诈、广告定向推荐、数字身份验证等，这些场景都有一些共同的特点： </p>
 <ul>
 <li>读多于写    </li>
 <li>随机读   </li>
@@ -437,31 +1005,379 @@
 </ul>
 <hr>
 <h3 id="查询索引"><a href="#查询索引" class="headerlink" title="查询索引"></a>查询索引</h3>
-        
-          <div class="more-link">
-            <a href="/2018/03/20/aerospike/#more">Read On »</a>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/20/aerospike/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
-</article>
+    
+    
+    
 
-    </li>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
   
-</ul>
+  
+  
+  </article>
 
 
-            <footer>
-    <div>© 2018 - Liao Jiayi </div>
-</footer>
+    
+  </section>
+
+  
+
+
+          </div>
+          
+
+
+          
 
         </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
     </div>
-</div>
-<script src="/js/pager/dist/singlepager.js"></script>
-<script>
-var sp = new Pager('data-pager-shell')
+  </div>
 
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/assets/avatar.jpg"
+                alt="Liao Jiayi" />
+            
+              <p class="site-author-name" itemprop="name">Liao Jiayi</p>
+              <p class="site-description motion-element" itemprop="description">Carpe Diem.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/buptljy" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:bupt_ljy@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liao Jiayi</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
 </script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+        <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
 </body>
 </html>
