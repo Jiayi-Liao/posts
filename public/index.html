@@ -12,6 +12,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
 
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?f338e6e48171cfc763820c8cbdff7286";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
 
 
 
@@ -252,6 +261,154 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.liaojiayi.com/2018/07/20/calcite/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liao Jiayi">
+      <meta itemprop="description" content="Carpe Diem.">
+      <meta itemprop="image" content="/assets/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Developer - 廖嘉逸">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/20/calcite/" itemprop="url">SQL解析框架 - Calcite</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-20T14:49:03+08:00">
+                2018-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/calcite/" itemprop="url" rel="index">
+                    <span itemprop="name">calcite</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="最通用的SQL解析框架-Calcite"><a href="#最通用的SQL解析框架-Calcite" class="headerlink" title="最通用的SQL解析框架 - Calcite"></a>最通用的SQL解析框架 - Calcite</h3><p>最近在研究Flink，在flink-table中看到了calcite，想到自己一年前刚刚从事大数据时，在Hive SQL就对SQL解析产生了很大的好奇，但当时对于这么多的概念一下子接受不过来就放弃了对calcite的研究，觉得现在还是应该再好好做一个总结。</p>
+<hr>
+<h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>如果你经常做数据处理一类的工作，必定不会对SQL感到陌生。Calcite作为业内通用的SQL处理器，被广泛的运用在了Hive、Flink、Beam等顶级开源项目中。<br>过去不少博客中提到的SQL解析部分(如spark-catalyst)往往都是说到这样一个流程:<br><img src="http://www.liaojiayi.com/assets/calcite-1.png" alt="SQL解析流程"><br>这个流程在Calcite中也是适用的，继续往下看。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/20/calcite/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.liaojiayi.com/2018/07/06/bitmap/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -347,9 +504,7 @@
           <p><strong>Paper原文地址</strong>：<a href="http://db.ucsd.edu/wp-content/uploads/2017/03/sidm338-wangA.pdf" target="_blank" rel="noopener">An Experimental Study of Bitmap Compression vs.<br>Inverted List Compression</a><br>Bitmap可以说是一个很万能的存储了，无论是空间消耗，还是查询响应，在最佳实践下，都可以达到很好的效果。最近做了不少Bitmap的研究，简单的基于上面的Paper去做一个记录。</p>
 <hr>
 <h2 id="History"><a href="#History" class="headerlink" title="History"></a>History</h2><p>从最原始的Bitmap到RoaringBitmap（可能是目前大多数场景的最佳选择？），虽然仔细研究Roaring的原理并不复杂，但也是经过了十几年的变化和迭代。  </p>
-<h4 id="WAH-Word-Aligned-Hybrid"><a href="#WAH-Word-Aligned-Hybrid" class="headerlink" title="WAH(Word Aligned Hybrid)"></a>WAH(Word Aligned Hybrid)</h4><p>这个算法只压缩全0或者全1的group。将所有bits按照连续的31bit进行分组，然后对每一组进行编码，编码后的长度为32bit。具体结构如下图所示：<br><img src="http://liaojiayi.com/assets/WAH.png" alt="WAH"></p>
-<h4 id="EWAH-Enhanced-Word-Aligned-Hybrid"><a href="#EWAH-Enhanced-Word-Aligned-Hybrid" class="headerlink" title="EWAH(Enhanced Word Aligned Hybrid)"></a>EWAH(Enhanced Word Aligned Hybrid)</h4><p>基于WAH加了一个Header，作为元信息的存储。我理解这其实并没有在存储上做到太多帮助的优化，反而是在查询或者插入中，会更加便捷。Header结构如下所示。<br><img src="http://liaojiayi.com/assets/EWAH.png" alt="EWAH"></p>
-<h4 id="CONCISE-Compressed-N-Composble-Integer-Set"><a href="#CONCISE-Compressed-N-Composble-Integer-Set" class="headerlink" title="CONCISE(Compressed N Composble Integer Set)"></a>CONCISE(Compressed N Composble Integer Set)</h4><p>这也是基于WAH做的一个优化。在WAH算法中，只要有一个bit被置1，那么整个group都无法被压缩，这一算法在这种odd bit上做了优化。记录了这个单一odd bit的位置。<br><img src="http://liaojiayi.com/assets/CONCISE.png" alt="CONCISE"></p>
+<h4 id="WAH-Word-Aligned-Hybrid"><a href="#WAH-Word-Aligned-Hybrid" class="headerlink" title="WAH(Word Aligned Hybrid)"></a>WAH(Word Aligned Hybrid)</h4>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/07/06/bitmap/#more" rel="contents">
@@ -505,16 +660,6 @@
 <li>在block中的部分数据被删除后，block的usage level将会从100%下降到低于defrag-lwm-pct（默认是50%），此时会触发defrag，将会有block放入write queue中被重写。  </li>
 </ol>
 <hr>
-<h4 id="Potential-Risk"><a href="#Potential-Risk" class="headerlink" title="Potential Risk"></a>Potential Risk</h4><p>在这样的写机制下，不难发现在一些细节上，会有潜在的问题。具体的调优方式可以参照<a href="https://www.aerospike.com/docs/reference/configuration#write-block-size" target="_blank" rel="noopener">Aerospike参数列表</a>。</p>
-<ul>
-<li>Record被写入block时，会出现record size &gt;  write-block-size的情况，此时异常退出，可以通过write-block-size在namespace级别做调整，write-block-size过大，容易出现usage-level过低频繁defrag，过小会增加和SSD的flush次数。</li>
-<li>Block在写入到write-queue中时，可能会出现queue大小超过最大限制的情况，异常为 “write fail: queue too deep: exceeds max %i”，queue长度可以通过max-write-cache调节， queue length = max-write-cache / write-block-size。</li>
-<li>为了能够高效读取数据，Record中的数据都是必须是在连续的内存空间中被写入的，这意味着UPDATE/DELETE/PUT等操作，都要将整条Record重新写入，所以不建议存储需要频繁更新的big record，否则对性能会产生很大的影响，且容易触发queue too deep的限制。</li>
-<li>频繁地UPDATE/DELETE/PUT操作会导致block usage level下降，从而产生defrag，而defrag会影响正常数据写入的效率，可以通过降低defrag的low-water-mark来减少defrag的次数，参数为defrag-lwm-pct。</li>
-<li>刚刚提到evict操作会将数据提前过期，这个可以通过high-water-memory-pct和high-water-dist-pct来调整evict的策略。</li>
-</ul>
-<hr>
-<h4 id="Log-Inspection"><a href="#Log-Inspection" class="headerlink" title="Log Inspection"></a>Log Inspection</h4>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/06/03/aerospike-write/#more" rel="contents">
@@ -683,35 +828,6 @@
 </tr>
 </tbody>
 </table>
-<p><strong>原生堆栈信息（Native frames）</strong>: 主要是一些jvm动态库的对战信息，是分析crash中比较重要的一个部分。<br><figure class="highlight go"><table><tr><td class="code"><pre><span class="line">Java Threads: ( =&gt; current thread )</span><br><span class="line">=&gt;<span class="number">0x00007ff2d</span>8001000 JavaThread <span class="string">"flink-akka.remote.default-remote-dispatcher-15"</span> daemon [_thread_new, id=<span class="number">31925</span>, stack(<span class="number">0x00007ff340ced</span>000,<span class="number">0x00007ff340d</span>ee000)]</span><br><span class="line">  <span class="number">0x00007ff</span>2ec053800 JavaThread <span class="string">"Hashed wheel timer #1"</span> daemon [_thread_blocked, id=<span class="number">14219</span>, stack(<span class="number">0x00007ff33bdf</span>e000,<span class="number">0x00007ff33beff</span>000)]</span><br><span class="line">  <span class="number">0x00007ff2d</span>c130800 JavaThread <span class="string">"New I/O server boss #6"</span> daemon [_thread_in_native, id=<span class="number">14218</span>, stack(<span class="number">0x00007ff33beff</span>000,<span class="number">0x00007ff</span>33c000000)]</span><br><span class="line">  <span class="number">0x00007ff2d</span>c119800 JavaThread <span class="string">"New I/O worker #5"</span> daemon [_thread_in_native, id=<span class="number">14217</span>, stack(<span class="number">0x00007ff</span>3400e3000,<span class="number">0x00007ff</span>3401e4000)]</span><br><span class="line">  <span class="number">0x00007ff2d</span>c0b6000 JavaThread <span class="string">"New I/O worker #4"</span> daemon [_thread_in_native, id=<span class="number">14216</span>, stack(<span class="number">0x00007ff</span>3401e4000,<span class="number">0x00007ff</span>3402e5000)]</span><br><span class="line">  <span class="number">0x00007ff2d</span>c0bb800 JavaThread <span class="string">"New I/O boss #3"</span> daemon [_thread_in_native, id=<span class="number">14215</span>, stack(<span class="number">0x00007ff</span>3402e5000,<span class="number">0x00007ff</span>3403e6000)]</span><br><span class="line">  <span class="number">0x00007ff2d</span>c05c000 JavaThread <span class="string">"New I/O worker #2"</span> daemon [_thread_in_native, id=<span class="number">14214</span>, stack(<span class="number">0x00007ff</span>3403e6000,<span class="number">0x00007ff</span>3404e7000)]</span><br><span class="line">  <span class="number">0x00007ff2d</span>c052000 JavaThread <span class="string">"New I/O worker #1"</span> daemon [_thread_in_native, id=<span class="number">14213</span>, stack(<span class="number">0x00007ff</span>3404e7000,<span class="number">0x00007ff</span>3405e8000)]</span><br><span class="line">  <span class="number">0x00007ff</span>2c8009800 JavaThread <span class="string">"flink-akka.remote.default-remote-dispatcher-7"</span> daemon [_thread_in_vm, id=<span class="number">14206</span>, stack(<span class="number">0x00007ff</span>3407e8000,<span class="number">0x00007ff</span>3408e9000)]</span><br><span class="line">  <span class="number">0x00007ff</span>2c800c000 JavaThread <span class="string">"flink-akka.remote.default-remote-dispatcher-6"</span> daemon [_thread_in_native, id=<span class="number">14202</span>, stack(<span class="number">0x00007ff</span>3408e9000,<span class="number">0x00007ff</span>3409ea000)]</span><br><span class="line">  <span class="number">0x00007ff</span>2cc020000 JavaThread <span class="string">"flink-akka.actor.default-dispatcher-5"</span> daemon [_thread_blocked, id=<span class="number">14147</span>, stack(<span class="number">0x00007ff</span>3409ea000,<span class="number">0x00007ff</span>340aeb000)]</span><br><span class="line">  <span class="number">0x00007ff</span>36222a800 JavaThread <span class="string">"flink-akka.actor.default-dispatcher-4"</span> daemon [_thread_blocked, id=<span class="number">14136</span>, stack(<span class="number">0x00007ff</span>340aeb000,<span class="number">0x00007ff</span>340bec000)]</span><br><span class="line">  <span class="number">0x00007ff</span>362229000 JavaThread <span class="string">"flink-akka.actor.default-dispatcher-3"</span> daemon [_thread_blocked, id=<span class="number">14135</span>, stack(<span class="number">0x00007ff</span>340bec000,<span class="number">0x00007ff340ced</span>000)]</span><br><span class="line">  <span class="number">0x00007ff</span>362183000 JavaThread <span class="string">"flink-scheduler-1"</span> daemon [_thread_blocked, id=<span class="number">14044</span>, stack(<span class="number">0x00007ff340f</span>ee000,<span class="number">0x00007ff3410ef</span>000)]</span><br><span class="line">  <span class="number">0x00007ff</span>3614b4000 JavaThread <span class="string">"Timer for 'phoenix' metrics system"</span> daemon [_thread_blocked, id=<span class="number">14032</span>, stack(<span class="number">0x00007ff342df</span>a000,<span class="number">0x00007ff342ef</span>b000)]</span><br><span class="line">  <span class="number">0x00007ff360f</span>c1000 JavaThread <span class="string">"main-EventThread"</span> daemon [_thread_blocked, id=<span class="number">14031</span>, stack(<span class="number">0x00007ff3431f</span>c000,<span class="number">0x00007ff3432fd</span>000)]</span><br><span class="line">  <span class="number">0x00007ff360faf</span>000 JavaThread <span class="string">"main-SendThread(cnzk2:2181)"</span> daemon [_thread_in_native, id=<span class="number">14030</span>, stack(<span class="number">0x00007ff3432fd</span>000,<span class="number">0x00007ff3433f</span>e000)]</span><br><span class="line">  <span class="number">0x00007ff</span>360471000 JavaThread <span class="string">"Thread-80"</span> daemon [_thread_blocked, id=<span class="number">14029</span>, stack(<span class="number">0x00007ff3430f</span>b000,<span class="number">0x00007ff3431f</span>c000)]</span><br><span class="line">  <span class="number">0x00007ff</span>3608a7000 JavaThread <span class="string">"IPC Parameter Sending Thread #0"</span> daemon [_thread_blocked, id=<span class="number">13178</span>, stack(<span class="number">0x00007ff3437f</span>e000,<span class="number">0x00007ff3438ff</span>000)]</span><br><span class="line">  <span class="number">0x00007ff</span>3608a4000 JavaThread <span class="string">"IPC Client (1508059488) connection to cnhm0/10.0.1.222:8032 from apps"</span> daemon [_thread_blocked, id=<span class="number">13177</span>, stack(<span class="number">0x00007ff</span>348923000,<span class="number">0x00007ff</span>348a24000)]</span><br><span class="line">  <span class="number">0x00007ff3600df</span>800 JavaThread <span class="string">"Service Thread"</span> daemon [_thread_blocked, id=<span class="number">13172</span>, stack(<span class="number">0x00007ff</span>3498c5000,<span class="number">0x00007ff</span>3499c6000)]</span><br><span class="line">  <span class="number">0x00007ff3600d</span>2000 JavaThread <span class="string">"C1 CompilerThread2"</span> daemon [_thread_in_native, id=<span class="number">13171</span>, stack(<span class="number">0x00007ff</span>3499c6000,<span class="number">0x00007ff</span>349ac7000)]</span><br><span class="line">  <span class="number">0x00007ff3600d</span>0000 JavaThread <span class="string">"C2 CompilerThread1"</span> daemon [_thread_blocked, id=<span class="number">13170</span>, stack(<span class="number">0x00007ff</span>349ac7000,<span class="number">0x00007ff</span>349bc8000)]</span><br><span class="line">  <span class="number">0x00007ff3600cd</span>000 JavaThread <span class="string">"C2 CompilerThread0"</span> daemon [_thread_blocked, id=<span class="number">13169</span>, stack(<span class="number">0x00007ff</span>349bc8000,<span class="number">0x00007ff</span>349cc9000)]</span><br><span class="line">  <span class="number">0x00007ff</span>3600cb000 JavaThread <span class="string">"JDWP Event Helper Thread"</span> daemon [_thread_blocked, id=<span class="number">13168</span>, stack(<span class="number">0x00007ff</span>349cc9000,<span class="number">0x00007ff349d</span>ca000)]</span><br><span class="line">  <span class="number">0x00007ff</span>3600c7000 JavaThread <span class="string">"JDWP Transport Listener: dt_socket"</span> daemon [_thread_in_native, id=<span class="number">13167</span>, stack(<span class="number">0x00007ff349d</span>ca000,<span class="number">0x00007ff</span>349ecb000)]</span><br><span class="line">  <span class="number">0x00007ff</span>3600b8000 JavaThread <span class="string">"Signal Dispatcher"</span> daemon [_thread_blocked, id=<span class="number">13166</span>, stack(<span class="number">0x00007ff34a0cf</span>000,<span class="number">0x00007ff34a1d</span>0000)]</span><br><span class="line">  <span class="number">0x00007ff</span>36008c000 JavaThread <span class="string">"Finalizer"</span> daemon [_thread_blocked, id=<span class="number">13165</span>, stack(<span class="number">0x00007ff34a1d</span>0000,<span class="number">0x00007ff34a2d</span>1000)]</span><br><span class="line">  <span class="number">0x00007ff</span>36008a000 JavaThread <span class="string">"Reference Handler"</span> daemon [_thread_blocked, id=<span class="number">13164</span>, stack(<span class="number">0x00007ff34a2d</span>1000,<span class="number">0x00007ff34a3d</span>2000)]</span><br><span class="line">  <span class="number">0x00007ff</span>360017000 JavaThread <span class="string">"main"</span> [_thread_blocked, id=<span class="number">13158</span>, stack(<span class="number">0x00007ff</span>369c7a000,<span class="number">0x00007ff369d</span>7b000)]</span><br><span class="line"></span><br><span class="line">Other Threads:</span><br><span class="line">  <span class="number">0x00007ff</span>360085000 VMThread [stack: <span class="number">0x00007ff34a3d</span>2000,<span class="number">0x00007ff34a4d</span>3000] [id=<span class="number">13163</span>]</span><br><span class="line">  <span class="number">0x00007ff</span>3600e2000 WatcherThread [stack: <span class="number">0x00007ff</span>3497c4000,<span class="number">0x00007ff</span>3498c5000] [id=<span class="number">13173</span>]</span><br></pre></td></tr></table></figure><br>这一部分是crash时Java代码中所有线程的状况。分析类似上一部分。<br><figure class="highlight livecodeserver"><table><tr><td class="code"><pre><span class="line">VM state:<span class="keyword">not</span> <span class="keyword">at</span> safepoint (<span class="keyword">normal</span> execution)</span><br><span class="line">VM Mutex/Monitor currently owned <span class="keyword">by</span> <span class="keyword">a</span> thread: None</span><br></pre></td></tr></table></figure><br><strong>VM状态</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>状态</th>
-<th style="text-align:center">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>not at a safepoint</td>
-<td style="text-align:center">正常执行</td>
-</tr>
-<tr>
-<td>at safepoint</td>
-<td style="text-align:center">所有VM内的线程被block住，在等待某一个VM操作完成</td>
-</tr>
-<tr>
-<td>synchronizing</td>
-<td style="text-align:center">一个特殊VM操作需要执行，VM在等待所有线程block</td>
-</tr>
-</tbody>
-</table>
-<figure class="highlight x86asm"><table><tr><td class="code"><pre><span class="line"><span class="symbol">Heap:</span></span><br><span class="line"> PSYoungGen  total 39424K, used 31166K [<span class="number">0x0000000771a00000</span>, <span class="number">0x0000000774780000</span>, <span class="number">0x00000007c0000000</span>)</span><br><span class="line">  eden space 38912K, <span class="number">79</span>% used [<span class="number">0x0000000771a00000</span>,<span class="number">0x000000077384faf0</span>,<span class="number">0x0000000774000000</span>)</span><br><span class="line">  from space 512K, <span class="number">25</span>% used [<span class="number">0x0000000774680000</span>,<span class="number">0x00000007746a0000</span>,<span class="number">0x0000000774700000</span>)</span><br><span class="line">  to   space 512K, <span class="number">0</span>% used [<span class="number">0x0000000774700000</span>,<span class="number">0x0000000774700000</span>,<span class="number">0x0000000774780000</span>)</span><br><span class="line"> ParOldGen   total 124928K, used 67043K [<span class="number">0x00000006d4e00000</span>, <span class="number">0x00000006dc800000</span>, <span class="number">0x0000000771a00000</span>)</span><br><span class="line">  object space 124928K, <span class="number">53</span>% used [<span class="number">0x00000006d4e00000</span>,<span class="number">0x00000006d8f78d18</span>,<span class="number">0x00000006dc800000</span>)</span><br><span class="line"> Metaspace   used 54122K, capacity 54748K, committed 54912K, reserved 1097728K</span><br><span class="line">  class spaceused 6562K, capacity 6716K, committed 6784K, reserved 1048576K</span><br><span class="line"></span><br><span class="line">Card table byte_map: [<span class="number">0x00007ff3664db000</span>,<span class="number">0x00007ff366c35000</span>] byte_map_base: <span class="number">0x00007ff362e34000</span></span><br><span class="line"></span><br><span class="line">Marking <span class="meta">Bits</span>: (ParMarkBitMap*) <span class="number">0x00007ff3691426c0</span></span><br><span class="line"> Begin <span class="meta">Bits</span>: [<span class="number">0x00007ff324a70000</span>, <span class="number">0x00007ff328538000</span>)</span><br><span class="line"> End <span class="meta">Bits</span>:   [<span class="number">0x00007ff328538000</span>, <span class="number">0x00007ff32c000000</span>)</span><br><span class="line"></span><br><span class="line">Polling page: <span class="number">0x00007ff369d84000</span></span><br><span class="line"></span><br><span class="line"><span class="symbol">CodeCache:</span> size=245760Kb used=17958Kb max_used=18385Kb free=227801Kb</span><br><span class="line"> bounds [<span class="number">0x00007ff34aad9000</span>, <span class="number">0x00007ff34bd29000</span>, <span class="number">0x00007ff359ad9000</span>]</span><br><span class="line"> total_blobs=<span class="number">6019</span> nmethods=<span class="number">5425</span> adapters=<span class="number">516</span></span><br><span class="line"><span class="symbol"> compilation:</span> enabled</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Card Table是jvm维护的一种数据结构，用于记录更改对象时的引用，方便GC。</li>
-<li>CodeCache是用来保存本地代码的，不属于PermGen。</li>
-</ul>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">Compilation <span class="keyword">events</span> (<span class="number">10</span> <span class="keyword">events</span>):</span><br><span class="line">GC Heap History (<span class="number">10</span> <span class="keyword">events</span>):</span><br><span class="line">Deoptimization <span class="keyword">events</span> (<span class="number">10</span> <span class="keyword">events</span>):</span><br><span class="line">Internal exceptions (<span class="number">10</span> <span class="keyword">events</span>):</span><br><span class="line">Events (<span class="number">10</span> <span class="keyword">events</span>):</span><br><span class="line">Dynamic libraries:</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/04/11/hs-err-pid-log/#more" rel="contents">
@@ -838,13 +954,7 @@
           <p><a href="https://flink.apache.org/features/2018/03/01/end-to-end-exactly-once-apache-flink.html" target="_blank" rel="noopener">Official Document</a></p>
 <h3 id="闲扯"><a href="#闲扯" class="headerlink" title="闲扯"></a>闲扯</h3><p>最近Spark2.3正式发布，流处理不再试Beta版，Spark的Structure Streaming几乎是拥有了Flink的所有功能，生态社区做得好就是不一样，Flink该加把劲了…</p>
 <hr>
-<h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>Exactly-once是一个经常提到的语义，也是程序开发中，需要尽可能做到的一个理想状态。这种语义其实放在分布式程序中有很多种理解，比如读取数据源Exactly-once，Process过程Exactly-once，存储数据Exactly-once，但我们常用的理解方式是End-to-end的语义，也就是说，每一个输入，只会影响一次输出。</p>
-<hr>
-<h3 id="Exacly-once"><a href="#Exacly-once" class="headerlink" title="Exacly-once"></a>Exacly-once</h3><p>既然是分布式的程序，要达到Exactly-once的语义，在输出那层，就应该只有两种情况，要么一起输出，要么一起不输出。Flink为此就提供了一个<strong>TwoPhaseCommitSinkFunction</strong>的抽象类用来完成这一语义，<a href="https://issues.apache.org/jira/browse/FLINK-7210" target="_blank" rel="noopener">JIRA</a>，<a href="https://github.com/apache/flink/pull/4368" target="_blank" rel="noopener">PR</a>。<br>顾名思义，此类利用了Checkpoint机制提供了两个Phase(步骤)：</p>
-<ol>
-<li>preCommit()</li>
-<li>commit()</li>
-</ol>
+<h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/03/20/flink-exactly-once/#more" rel="contents">
@@ -976,35 +1086,6 @@
 </ul>
 <p>数据量不大时，有很多优秀的框架可以使用，比如单机的redis、Cassandra等，它们不但满足上述需求而且还有着易于运维、管理方便的优点，但随着业务规模扩大，不可预测的大流量、查询延时低效都成为了比较难解决的痛点。<br>Aerospike在2012年作为分布式KV数据库出现后，以稳定性和延迟低的特点让不少公司开始试水，到如今4.0版本发布，6年时间里Aerospike已经积累了不少在不同行业的成功案例。</p>
 <hr>
-<h3 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h3><p>我理解在Aerospike的Data model其实和Hbase中的namespace/table/row/column family非常类似。   </p>
-<ul>
-<li><strong>namespace</strong><ul>
-<li>namespace是最高层级的一个容器概念，决定了这个容器中的数据的存储方式，有着如下的配置    </li>
-<li>如何存储，可以选择全部存储到DRAM或者SSD上</li>
-<li>replica复制因子，决定了这个namespace的高可用性</li>
-<li>expire TTL</li>
-</ul>
-</li>
-<li><strong>sets</strong><ul>
-<li>sets是可选项，数据存储时可以指定set也可以不指定，在set中可以设置基于set的二级索引</li>
-</ul>
-</li>
-<li><strong>records</strong><ul>
-<li>record就是一行记录了，包括:<ul>
-<li>key</li>
-<li>metadata(版本号(version), ttl, last-update-time(lut))</li>
-<li>bins</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>bins</strong><ul>
-<li>包括name和value（类似列名和值）</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h3 id="查询索引"><a href="#查询索引" class="headerlink" title="查询索引"></a>查询索引</h3>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/03/20/aerospike/#more" rel="contents">
@@ -1095,7 +1176,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1106,7 +1187,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -1117,7 +1198,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
