@@ -77,7 +77,7 @@ var _hmt = _hmt || [];
 
 
 
-  <meta name="keywords" content="Aerospike," />
+  <meta name="keywords" content="cep," />
 
 
 
@@ -88,20 +88,20 @@ var _hmt = _hmt || [];
 
 
 
-<meta name="description" content="最近使用Aerospike遇到了不少的问题，在不断地看日志，读源码，阅读Aerospike社区的各种文章之后，也算是对Aerospike有了一些更深的了解。 Storage LayoutSSD namespace的写流程基本如上图所示，现在，让我们假设有一个写操作MapOperation.PUT正在进行，它的路径将会是这样：    根据MapOperation.PUT的各种参数和策略，来校验Met">
-<meta name="keywords" content="Aerospike">
+<meta name="description" content="实时处理中自然少不了CEP这个重量级功能。其实已经有不少成熟的框架实现了CEP，如Github siddhi和EsperTech，但他们使用了特有的语法来做到开发者的友好交互。那么，把CEP的功能加入到万能的SQL中，是不是很有意思呢？    详见Oracle文档，本篇博客语法解释及示例均来自官方文档。 速览先来一个简单的例子，下面是一个股票实时折线图。在这个图中，我们需要实时捕获X-Y-W-Z（">
+<meta name="keywords" content="cep">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Aerospike笔记（二）- 写机制">
-<meta property="og:url" content="http://www.liaojiayi.com/2018/06/03/aerospike-write/index.html">
+<meta property="og:title" content="Oracle SQL中的CEP语法梳理">
+<meta property="og:url" content="http://www.liaojiayi.com/2018/08/25/oracle-cep/index.html">
 <meta property="og:site_name" content="Developer - 廖嘉逸">
-<meta property="og:description" content="最近使用Aerospike遇到了不少的问题，在不断地看日志，读源码，阅读Aerospike社区的各种文章之后，也算是对Aerospike有了一些更深的了解。 Storage LayoutSSD namespace的写流程基本如上图所示，现在，让我们假设有一个写操作MapOperation.PUT正在进行，它的路径将会是这样：    根据MapOperation.PUT的各种参数和策略，来校验Met">
+<meta property="og:description" content="实时处理中自然少不了CEP这个重量级功能。其实已经有不少成熟的框架实现了CEP，如Github siddhi和EsperTech，但他们使用了特有的语法来做到开发者的友好交互。那么，把CEP的功能加入到万能的SQL中，是不是很有意思呢？    详见Oracle文档，本篇博客语法解释及示例均来自官方文档。 速览先来一个简单的例子，下面是一个股票实时折线图。在这个图中，我们需要实时捕获X-Y-W-Z（">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://liaojiayi.com/assets/aerospike0.png">
-<meta property="og:updated_time" content="2018-07-18T10:43:18.423Z">
+<meta property="og:image" content="http://www.liaojiayi.com/assets/cep-stock.png">
+<meta property="og:updated_time" content="2018-08-24T23:12:25.922Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Aerospike笔记（二）- 写机制">
-<meta name="twitter:description" content="最近使用Aerospike遇到了不少的问题，在不断地看日志，读源码，阅读Aerospike社区的各种文章之后，也算是对Aerospike有了一些更深的了解。 Storage LayoutSSD namespace的写流程基本如上图所示，现在，让我们假设有一个写操作MapOperation.PUT正在进行，它的路径将会是这样：    根据MapOperation.PUT的各种参数和策略，来校验Met">
-<meta name="twitter:image" content="http://liaojiayi.com/assets/aerospike0.png">
+<meta name="twitter:title" content="Oracle SQL中的CEP语法梳理">
+<meta name="twitter:description" content="实时处理中自然少不了CEP这个重量级功能。其实已经有不少成熟的框架实现了CEP，如Github siddhi和EsperTech，但他们使用了特有的语法来做到开发者的友好交互。那么，把CEP的功能加入到万能的SQL中，是不是很有意思呢？    详见Oracle文档，本篇博客语法解释及示例均来自官方文档。 速览先来一个简单的例子，下面是一个股票实时折线图。在这个图中，我们需要实时捕获X-Y-W-Z（">
+<meta name="twitter:image" content="http://www.liaojiayi.com/assets/cep-stock.png">
 
 
 
@@ -131,13 +131,13 @@ var _hmt = _hmt || [];
 
 
 
-  <link rel="canonical" href="http://www.liaojiayi.com/2018/06/03/aerospike-write/"/>
+  <link rel="canonical" href="http://www.liaojiayi.com/2018/08/25/oracle-cep/"/>
 
 
 
 
 
-  <title>Aerospike笔记（二）- 写机制 | Developer - 廖嘉逸</title>
+  <title>Oracle SQL中的CEP语法梳理 | Developer - 廖嘉逸</title>
   
 
 
@@ -264,7 +264,7 @@ var _hmt = _hmt || [];
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.liaojiayi.com/2018/06/03/aerospike-write/">
+    <link itemprop="mainEntityOfPage" href="http://www.liaojiayi.com/2018/08/25/oracle-cep/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Liao Jiayi">
@@ -281,7 +281,7 @@ var _hmt = _hmt || [];
 
         
         
-          <h2 class="post-title" itemprop="name headline">Aerospike笔记（二）- 写机制</h2>
+          <h2 class="post-title" itemprop="name headline">Oracle SQL中的CEP语法梳理</h2>
         
 
         <div class="post-meta">
@@ -293,8 +293,8 @@ var _hmt = _hmt || [];
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-03T15:21:29+08:00">
-                2018-06-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-25T07:08:40+08:00">
+                2018-08-25
               </time>
             
 
@@ -303,28 +303,6 @@ var _hmt = _hmt || [];
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/aerospike/" itemprop="url" rel="index">
-                    <span itemprop="name">aerospike</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -353,28 +331,49 @@ var _hmt = _hmt || [];
       
 
       
-        <p>最近使用Aerospike遇到了不少的问题，在不断地看日志，读源码，阅读<a href="https://discuss.aerospike.com/t/device-overload-when-map-size-is-too-big/5206" target="_blank" rel="noopener">Aerospike社区</a>的各种文章之后，也算是对Aerospike有了一些更深的了解。</p>
-<h4 id="Storage-Layout"><a href="#Storage-Layout" class="headerlink" title="Storage Layout"></a>Storage Layout</h4><p><img src="http://liaojiayi.com/assets/aerospike0.png" alt="Storage Layout"><br>SSD namespace的写流程基本如上图所示，现在，让我们假设有一个写操作<strong><em>MapOperation.PUT</em></strong>正在进行，它的路径将会是这样：  </p>
-<ol>
-<li>根据<strong>MapOperation.PUT</strong>的各种参数和策略，来校验Metadata，例如namespace、set是否存在，然后写入到最小写单元block5中。  </li>
-<li>block的默认大小为1024bytes，只有当block为full或者没有数据继续写入时才会触发block添加到写队列Write Queue。  </li>
-<li>独立的worker线程会将Write Queue中的数据持久化到SSD中。  </li>
-<li>数据写入后，如果memory或者storage存储到达了hwm(high-watermark-memory)，将会触发evict操作，即为了清理空间，把一些未来将要过期的数据提前过期，具体原理在<a href="https://discuss.aerospike.com/t/records-ttl-and-evictions-for-aerospike-server-version-prior-to-3-8/737" target="_blank" rel="noopener">ttl及eviction机制</a>。  </li>
-<li>在block中的部分数据被删除后，block的usage level将会从100%下降到低于defrag-lwm-pct（默认是50%），此时会触发defrag，将会有block放入write queue中被重写。  </li>
-</ol>
+        <p>实时处理中自然少不了CEP这个重量级功能。其实已经有不少成熟的框架实现了CEP，如<a href="https://github.com/wso2/siddhi" target="_blank" rel="noopener">Github siddhi</a>和<a href="http://www.espertech.com/" target="_blank" rel="noopener">EsperTech</a>，但他们使用了特有的语法来做到开发者的友好交互。那么，把CEP的功能加入到万能的SQL中，是不是很有意思呢？  </p>
 <hr>
-<h4 id="Potential-Risk"><a href="#Potential-Risk" class="headerlink" title="Potential Risk"></a>Potential Risk</h4><p>在这样的写机制下，不难发现在一些细节上，会有潜在的问题。具体的调优方式可以参照<a href="https://www.aerospike.com/docs/reference/configuration#write-block-size" target="_blank" rel="noopener">Aerospike参数列表</a>。</p>
-<ul>
-<li>Record被写入block时，会出现record size &gt;  write-block-size的情况，此时异常退出，可以通过write-block-size在namespace级别做调整，write-block-size过大，容易出现usage-level过低频繁defrag，过小会增加和SSD的flush次数。</li>
-<li>Block在写入到write-queue中时，可能会出现queue大小超过最大限制的情况，异常为 “write fail: queue too deep: exceeds max %i”，queue长度可以通过max-write-cache调节， queue length = max-write-cache / write-block-size。</li>
-<li>为了能够高效读取数据，Record中的数据都是必须是在连续的内存空间中被写入的，这意味着UPDATE/DELETE/PUT等操作，都要将整条Record重新写入，所以不建议存储需要频繁更新的big record，否则对性能会产生很大的影响，且容易触发queue too deep的限制。</li>
-<li>频繁地UPDATE/DELETE/PUT操作会导致block usage level下降，从而产生defrag，而defrag会影响正常数据写入的效率，可以通过降低defrag的low-water-mark来减少defrag的次数，参数为defrag-lwm-pct。</li>
-<li>刚刚提到evict操作会将数据提前过期，这个可以通过high-water-memory-pct和high-water-dist-pct来调整evict的策略。</li>
-</ul>
-<hr>
-<h4 id="Log-Inspection"><a href="#Log-Inspection" class="headerlink" title="Log Inspection"></a>Log Inspection</h4><p>Log是最容易看出问题的方式，但是as的Log有些表达显得略有晦涩，采取了不少缩写的表达，目前来看，log level调整为 info 已经能够帮助定位大部分问题，这里挑取一些关键信息做一下记录。<br><figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">&#123;test&#125; <span class="regexp">/dev/</span>xvdc: used-bytes <span class="number">3695468032</span> free-wblocks <span class="number">34690</span> <span class="keyword">write</span>-q <span class="number">0</span> <span class="keyword">write</span> (<span class="number">445674</span>,<span class="number">0.0</span>) defrag-q <span class="number">0</span> defrag-<span class="keyword">read</span> (<span class="number">39134</span>,<span class="number">0.0</span>) defrag-<span class="keyword">write</span> (<span class="number">5427</span>,<span class="number">0.0</span>)</span><br></pre></td></tr></table></figure></p>
-<p>这是as定时output出的某个节点的基本情况，针对namespace test，在/dev/xvdc的SSD上，已经使用了3695468032 bytes的磁盘空间，当前可以使用的free-wblocks有34690个，write-queue长度为0，写入了445674个(包括defrag)blocks，当前写入速率为0.0，defrag-queue长度为0，加入到defrag队列中的有 39134个blocks，当前速率为0.0，真正产生defrag的block数为5427，当前速率为0.0。<br><figure class="highlight less"><table><tr><td class="code"><pre><span class="line">&#123;<span class="selector-tag">test</span>&#125; <span class="selector-tag">breached</span> <span class="selector-tag">eviction</span> <span class="selector-tag">hwm</span> (memory), <span class="selector-tag">memory</span> <span class="selector-tag">sz</span><span class="selector-pseudo">:1792174976</span> (<span class="number">1792174976</span> + <span class="number">0</span>) <span class="selector-tag">hwm</span><span class="selector-pseudo">:1288490188</span>, <span class="selector-tag">disk</span> <span class="selector-tag">sz</span><span class="selector-pseudo">:3695922432</span> <span class="selector-tag">hwm</span><span class="selector-pseudo">:20128464896</span></span><br><span class="line"><span class="selector-tag">no</span> <span class="selector-tag">records</span> <span class="selector-tag">below</span> <span class="selector-tag">eviction</span> <span class="selector-tag">void-time</span> <span class="selector-tag">266233878</span> <span class="selector-tag">-</span> <span class="selector-tag">threshold</span> <span class="selector-tag">bucket</span> <span class="selector-tag">4678</span>, <span class="selector-tag">width</span> <span class="selector-tag">113</span> <span class="selector-tag">sec</span>, <span class="selector-tag">count</span> <span class="selector-tag">298</span> &gt; <span class="selector-tag">target</span> <span class="selector-tag">11</span> (<span class="number">0.5</span> pct)</span><br></pre></td></tr></table></figure></p>
-<p>这条log和<a href="https://discuss.aerospike.com/t/records-ttl-and-evictions-for-aerospike-server-version-prior-to-3-8/737" target="_blank" rel="noopener">as的evict机制</a>有关，这里是表示当前size已经超过了hwm，触发了eviction，但是由于count 298 &gt; target 11（bucket是最小的evict单位，此时找到了最大可以evict的个数为11个，但是最近的bucket中有298个，所以无法触发）。</p>
+<p><strong>详见<a href="https://docs.oracle.com/middleware/1213/eventprocessing/cql-reference/GUID-34D4968E-C55A-4BC7-B1CE-C84B202217BD.htm#CQLLR1531" target="_blank" rel="noopener">Oracle文档</a></strong>，本篇博客语法解释及示例均来自官方文档。</p>
+<h4 id="速览"><a href="#速览" class="headerlink" title="速览"></a>速览</h4><p>先来一个简单的例子，下面是一个股票实时折线图。<br><img src="http://www.liaojiayi.com/assets/cep-stock.png" alt="cep-stock"><br>在这个图中，我们需要实时捕获X-Y-W-Z（跌-涨-跌-涨）的趋势，拿到趋势起始点和终止点。此时，SQL如下，出现了很多不常见的SQL语法对吧？<br>接下来我们逐个揭晓。</p>
+<figure class="highlight tp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    T.A,</span><br><span class="line">    T.lastZ</span><br><span class="line">FROM</span><br><span class="line">    STREAM</span><br><span class="line">MATCH_RECOGNIZE (</span><br><span class="line">    MEASURES</span><br><span class="line">        A,</span><br><span class="line">        last(<span class="keyword">Z</span>) as lastZ</span><br><span class="line">    PATTERN(A <span class="keyword">W</span>+ <span class="keyword">X</span>+ <span class="keyword">Y</span>+ <span class="keyword">Z</span>+)</span><br><span class="line">    DEFINE </span><br><span class="line">        <span class="keyword">W</span> as <span class="keyword">W</span>.price &lt; prev(<span class="keyword">W</span>.price),</span><br><span class="line">        <span class="keyword">X</span> as <span class="keyword">X</span>.price &gt; prev(<span class="keyword">X</span>.price),</span><br><span class="line">        <span class="keyword">Y</span> as <span class="keyword">Y</span>.price &lt; prev(<span class="keyword">Y</span>.price),</span><br><span class="line">        <span class="keyword">Z</span> as <span class="keyword">Z</span>.price &gt; prev(<span class="keyword">Z</span>.price)</span><br><span class="line">) as T</span><br></pre></td></tr></table></figure>
+<h4 id="MATCH-RECOGNIZE"><a href="#MATCH-RECOGNIZE" class="headerlink" title="MATCH_RECOGNIZE"></a>MATCH_RECOGNIZE</h4><p>作为CEP的标识符而存在，通常使用 <strong>SELECT … FROM S MATCH_RECOGNIZE ( …. ) as T WHERE …</strong> 来表示一个CEP的操作。</p>
+<h4 id="MEASURES"><a href="#MEASURES" class="headerlink" title="MEASURES"></a>MEASURES</h4><p>生成T的指标，指标中的事件可以选择<strong>DEFINE</strong>中已经出现过的事件。可以使用示例中的Z.price也可以使用如sum等UDAP函数。</p>
+<h4 id="PATTERN"><a href="#PATTERN" class="headerlink" title="PATTERN"></a>PATTERN</h4><p>示例中的 <strong>(A W+ X+ Y+ Z+)</strong> 表示了严格的事件顺序，在这里表示A后面可以跟随N个W事件，last W后跟随N个X事件，last X后跟随N个Y事件，last Y后跟随N个Z事件。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">贪婪</th>
+<th style="text-align:center">非贪婪</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">*</td>
+<td style="text-align:center">*?</td>
+<td style="text-align:center">匹配0~N个</td>
+</tr>
+<tr>
+<td style="text-align:center">+</td>
+<td style="text-align:center">+?</td>
+<td style="text-align:center">匹配1~N个</td>
+</tr>
+<tr>
+<td style="text-align:center">?</td>
+<td style="text-align:center">??</td>
+<td style="text-align:center">匹配0,1个</td>
+</tr>
+</tbody>
+</table>
+<p>贪婪和非贪婪举例如下，如<strong>(A B* C)</strong>，如果某事件同时满足B和C在DEFINE中的条件，那么此时会将此事件归因为B，若B使用非贪婪*?，则此事件归因为C。<br>这里还可以采用正则表达式，如<strong>(A B+ | C)</strong>这样的形式。</p>
+<h4 id="DEFINE"><a href="#DEFINE" class="headerlink" title="DEFINE"></a>DEFINE</h4><p>事件的定义，业务逻辑写在这一步，如 <strong>W as W.price &lt; prev(W.price)</strong>，即W事件需要满足价格低于上一个W事件价格的条件。</p>
+<h4 id="PARTITION-BY"><a href="#PARTITION-BY" class="headerlink" title="PARTITION BY"></a>PARTITION BY</h4><p>数据分区，类似窗口函数用法。假设之前的折线图，我们要按照股票行业来划分，SQL可以写成如下形式：</p>
+<figure class="highlight tp"><table><tr><td class="code"><pre><span class="line">PARTITION BY</span><br><span class="line">    A.industry</span><br><span class="line">MEASURES</span><br><span class="line">    A,</span><br><span class="line">    last(<span class="keyword">Z</span>) as lastZ</span><br><span class="line">PATTERN(A <span class="keyword">W</span>+ <span class="keyword">X</span>+ <span class="keyword">Y</span>+ <span class="keyword">Z</span>+)</span><br><span class="line">DEFINE </span><br><span class="line">    <span class="keyword">W</span> as <span class="keyword">W</span>.price &lt; prev(<span class="keyword">W</span>.price),</span><br><span class="line">    <span class="keyword">X</span> as <span class="keyword">X</span>.price &gt; prev(<span class="keyword">X</span>.price),</span><br><span class="line">    <span class="keyword">Y</span> as <span class="keyword">Y</span>.price &lt; prev(<span class="keyword">Y</span>.price),</span><br><span class="line">    <span class="keyword">Z</span> as <span class="keyword">Z</span>.price &gt; prev(<span class="keyword">Z</span>.price)</span><br></pre></td></tr></table></figure>
+<h4 id="DURATION"><a href="#DURATION" class="headerlink" title="DURATION"></a>DURATION</h4><p>在示例中，你不希望曲线过于震荡，你的期望是，在10分钟内只发生W，X，Y，Z的趋势，在趋势完成后，不要再出现其他的转折点。那么此时可以限定10分钟内，不会有其他的事件掺入。</p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">MEASURES</span><br><span class="line">    A,</span><br><span class="line">    last(Z) as lastZ</span><br><span class="line">include timer events <span class="comment">// 和duration 10配合使用</span></span><br><span class="line"><span class="function"><span class="title">PATTERN</span><span class="params">(A W+ X+ Y+ Z+)</span></span></span><br><span class="line">duration <span class="number">10</span> </span><br><span class="line">DEFINE </span><br><span class="line">    W as W<span class="selector-class">.price</span> &lt; prev(W.price),</span><br><span class="line">    X as X<span class="selector-class">.price</span> &gt; prev(X.price),</span><br><span class="line">    Y as Y<span class="selector-class">.price</span> &lt; prev(Y.price),</span><br><span class="line">    Z as Z<span class="selector-class">.price</span> &gt; prev(Z.price)</span><br></pre></td></tr></table></figure>
+<h4 id="WITHIN"><a href="#WITHIN" class="headerlink" title="WITHIN"></a>WITHIN</h4><p>在示例中，你不希望用一天去等待这个趋势，你期望在10分钟之内达到你的条件时，这个趋势才是有效的。注意WITHIN和WITHIN INCLUSIVE两种用法，对边界的包含是不同的。</p>
+<figure class="highlight tp"><table><tr><td class="code"><pre><span class="line">MEASURES</span><br><span class="line">    A,</span><br><span class="line">    last(<span class="keyword">Z</span>) as lastZ</span><br><span class="line">PATTERN(A <span class="keyword">W</span>+ <span class="keyword">X</span>+ <span class="keyword">Y</span>+ <span class="keyword">Z</span>+)</span><br><span class="line">DEFINE </span><br><span class="line">    <span class="keyword">W</span> as <span class="keyword">W</span>.price &lt; prev(<span class="keyword">W</span>.price),</span><br><span class="line">    <span class="keyword">X</span> as <span class="keyword">X</span>.price &gt; prev(<span class="keyword">X</span>.price),</span><br><span class="line">    <span class="keyword">Y</span> as <span class="keyword">Y</span>.price &lt; prev(<span class="keyword">Y</span>.price),</span><br><span class="line">    <span class="keyword">Z</span> as <span class="keyword">Z</span>.price &gt; prev(<span class="keyword">Z</span>.price)</span><br></pre></td></tr></table></figure>
+<h4 id="ALL-MATCHES"><a href="#ALL-MATCHES" class="headerlink" title="ALL MATCHES"></a>ALL MATCHES</h4><p>以股票折线图为例，在X的下降折线中，随意选择一点都满足DEFINE中的条件，此时ALL MATCHES会将他们全都匹配到。如果不设置ALL MATCHES，匹配到后处理程序会自动跳到最后一个事件的位置。</p>
 
       
     </div>
@@ -392,7 +391,7 @@ var _hmt = _hmt || [];
       
         <div class="post-tags">
           
-            <a href="/tags/Aerospike/" rel="tag"># Aerospike</a>
+            <a href="/tags/cep/" rel="tag"># cep</a>
           
         </div>
       
@@ -405,8 +404,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/11/hs-err-pid-log/" rel="next" title="hs_err_pid.log里是些什么？">
-                <i class="fa fa-chevron-left"></i> hs_err_pid.log里是些什么？
+              <a href="/2018/07/22/tools/" rel="next" title="常用调试工具列表">
+                <i class="fa fa-chevron-left"></i> 常用调试工具列表
               </a>
             
           </div>
@@ -414,10 +413,6 @@ var _hmt = _hmt || [];
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/06/bitmap/" rel="prev" title="Bitmap的小研究">
-                Bitmap的小研究 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -576,7 +571,7 @@ var _hmt = _hmt || [];
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Storage-Layout"><span class="nav-number">1.</span> <span class="nav-text">Storage Layout</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Potential-Risk"><span class="nav-number">2.</span> <span class="nav-text">Potential Risk</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Log-Inspection"><span class="nav-number">3.</span> <span class="nav-text">Log Inspection</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#速览"><span class="nav-number">1.</span> <span class="nav-text">速览</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MATCH-RECOGNIZE"><span class="nav-number">2.</span> <span class="nav-text">MATCH_RECOGNIZE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MEASURES"><span class="nav-number">3.</span> <span class="nav-text">MEASURES</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PATTERN"><span class="nav-number">4.</span> <span class="nav-text">PATTERN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DEFINE"><span class="nav-number">5.</span> <span class="nav-text">DEFINE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PARTITION-BY"><span class="nav-number">6.</span> <span class="nav-text">PARTITION BY</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DURATION"><span class="nav-number">7.</span> <span class="nav-text">DURATION</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WITHIN"><span class="nav-number">8.</span> <span class="nav-text">WITHIN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ALL-MATCHES"><span class="nav-number">9.</span> <span class="nav-text">ALL MATCHES</span></a></li></ol></div>
             
 
           </div>
