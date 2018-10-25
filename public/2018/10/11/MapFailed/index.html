@@ -77,7 +77,7 @@ var _hmt = _hmt || [];
 
 
 
-  <meta name="keywords" content="Liaojiayi,Blog,Data" />
+  <meta name="keywords" content="jvm," />
 
 
 
@@ -88,16 +88,20 @@ var _hmt = _hmt || [];
 
 
 
-<meta name="description" content="Never give up chasing the wind.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Developer - 廖嘉逸">
-<meta property="og:url" content="http://www.liaojiayi.com/tags/Aerospike/index.html">
+<meta name="description" content="最近遇到这个Exception，发现不少开源框架在实现快速读写文件时，采用的都是FileChannel的map方法，示例如下：at sun.nio.ch.FileChannelImpl.map0(Native Method) ~[?:1.8.0_40]at sun.nio.ch.FileChannelImpl.map(FileChannelImpl.java:904) ~[?:1.8.0_40]">
+<meta name="keywords" content="jvm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java.lang.OutOfMemoryError: Map failed">
+<meta property="og:url" content="http://www.liaojiayi.com/2018/10/11/MapFailed/index.html">
 <meta property="og:site_name" content="Developer - 廖嘉逸">
-<meta property="og:description" content="Never give up chasing the wind.">
+<meta property="og:description" content="最近遇到这个Exception，发现不少开源框架在实现快速读写文件时，采用的都是FileChannel的map方法，示例如下：at sun.nio.ch.FileChannelImpl.map0(Native Method) ~[?:1.8.0_40]at sun.nio.ch.FileChannelImpl.map(FileChannelImpl.java:904) ~[?:1.8.0_40]">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://www.liaojiayi.com/assets/mmap1.jpg">
+<meta property="og:updated_time" content="2018-10-11T01:20:52.702Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Developer - 廖嘉逸">
-<meta name="twitter:description" content="Never give up chasing the wind.">
+<meta name="twitter:title" content="java.lang.OutOfMemoryError: Map failed">
+<meta name="twitter:description" content="最近遇到这个Exception，发现不少开源框架在实现快速读写文件时，采用的都是FileChannel的map方法，示例如下：at sun.nio.ch.FileChannelImpl.map0(Native Method) ~[?:1.8.0_40]at sun.nio.ch.FileChannelImpl.map(FileChannelImpl.java:904) ~[?:1.8.0_40]">
+<meta name="twitter:image" content="http://www.liaojiayi.com/assets/mmap1.jpg">
 
 
 
@@ -127,13 +131,13 @@ var _hmt = _hmt || [];
 
 
 
-  <link rel="canonical" href="http://www.liaojiayi.com/tags/Aerospike/"/>
+  <link rel="canonical" href="http://www.liaojiayi.com/2018/10/11/MapFailed/"/>
 
 
 
 
 
-  <title>标签: Aerospike | Developer - 廖嘉逸</title>
+  <title>java.lang.OutOfMemoryError: Map failed | Developer - 廖嘉逸</title>
   
 
 
@@ -152,7 +156,7 @@ var _hmt = _hmt || [];
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -246,82 +250,185 @@ var _hmt = _hmt || [];
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h2>Aerospike<small>标签</small>
-        </h2>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.liaojiayi.com/2018/10/11/MapFailed/">
 
-      <h3 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liao Jiayi">
+      <meta itemprop="description" content="Carpe Diem.">
+      <meta itemprop="image" content="/assets/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Developer - 廖嘉逸">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/06/03/aerospike-write/" itemprop="url">
-              
-                <span itemprop="name">Aerospike笔记（二）- 写机制</span>
-              
-            </a>
         
-      </h3>
+          <h2 class="post-title" itemprop="name headline">java.lang.OutOfMemoryError: Map failed</h2>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-06-03T15:21:29+08:00"
-              content="2018-06-03" >
-          06-03
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-11T09:19:07+08:00">
+                2018-10-11
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jvm/" itemprop="url" rel="index">
+                    <span itemprop="name">jvm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
+      
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/20/aerospike/" itemprop="url">
-              
-                <span itemprop="name">Aerospike学习笔记</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-20T01:01:00+08:00"
-              content="2018-03-20" >
-          03-20
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <p>最近遇到这个Exception，发现不少开源框架在实现快速读写文件时，采用的都是FileChannel的map方法，示例如下：<br><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">at</span> <span class="selector-tag">sun</span><span class="selector-class">.nio</span><span class="selector-class">.ch</span><span class="selector-class">.FileChannelImpl</span><span class="selector-class">.map0</span>(<span class="selector-tag">Native</span> <span class="selector-tag">Method</span>) ~<span class="selector-attr">[?:1.8.0_40]</span></span><br><span class="line"><span class="selector-tag">at</span> <span class="selector-tag">sun</span><span class="selector-class">.nio</span><span class="selector-class">.ch</span><span class="selector-class">.FileChannelImpl</span><span class="selector-class">.map</span>(<span class="selector-tag">FileChannelImpl</span><span class="selector-class">.java</span><span class="selector-pseudo">:904)</span> ~<span class="selector-attr">[?:1.8.0_40]</span></span><br></pre></td></tr></table></figure></p>
+<p>这个方法的作用是将文件映射到堆外内存中，然后通过读写内存来实现对文件的快速读写。从<a href="https://zhuanlan.zhihu.com/p/27698585" target="_blank" rel="noopener">知乎</a>摘了一张图。<br><img src="http://www.liaojiayi.com/assets/mmap1.jpg" alt="mmap display"></p>
+<hr>
+<h4 id="问题-amp-解决"><a href="#问题-amp-解决" class="headerlink" title="问题 &amp; 解决"></a>问题 &amp; 解决</h4><p>目前来看，我在使用MapDB和Phoenix时都曾经出现过这个Exception，MapDB直接将DB文件映射到堆外内存，来达到高效的读写；Phoenix在结果集过大时，需要落地成临时文件，而这个临时文件是采用mmap来操作的。  </p>
+<p><strong>Map Failed</strong> 出现的原因有很多:</p>
+<pre><code>1. 对于32-bit JVM，由于地址空间是32 bit，2^32=4GB，所以我们能映射的文件大小只有4GB，但实际上因为其他对象同样需要占用地址空间，所以正常情况下，只能映射1GB左右。   
+2. Java程序有默认的maxDirectMemory，即JVM可使用的最大堆外内存，稍不注意，就有可能超过并且抛出异常（如在Phoenix数据查询中结果集过大）。
+3. mmap句柄超过了系统默认最大值。系统默认最大值可使用```cat /proc/sys/vm/max_map_count```查看，进程使用句柄数可使用```cat /proc/$PID/maps | wc -l```查看。每一块申请的ByteBuffer都对应一个mmap句柄，也就是说，如果生成了大量的碎ByteBuffer，那么句柄数也会急剧增长。而这些句柄的回收是伴随着ByteBuffer回收的，堆外内存的GC需要显示调用System.gc来进行。  
+</code></pre><p>解决方式：</p>
+<pre><code>1. 若为32-bit JVM，可升级到64-bit，获得更大的地址空间。
+2. 若为64-bit JVM，当超出堆外内存不多且使用总内存小于32GB时，使用-XX:useCompressedOops来压缩对象的空间大小。
+3. 调整-XX:maxDirectMemorySize来获得更多的堆外内存。
+4. 调整/proc/sys/vm/max_map_count。
+</code></pre>
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/jvm/" rel="tag"># jvm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/25/oracle-cep/" rel="next" title="Oracle SQL中的CEP语法梳理">
+                <i class="fa fa-chevron-left"></i> Oracle SQL中的CEP语法梳理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/25/flink-checkpoint/" rel="prev" title="如何在无Checkpoint时初始化Flink的状态？">
+                如何在无Checkpoint时初始化Flink的状态？ <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -329,6 +436,17 @@ var _hmt = _hmt || [];
 
 
           
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
 
         </div>
         
@@ -349,8 +467,17 @@ var _hmt = _hmt || [];
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -430,6 +557,22 @@ var _hmt = _hmt || [];
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题-amp-解决"><span class="nav-number">1.</span> <span class="nav-text">问题 &amp; 解决</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -563,6 +706,10 @@ var _hmt = _hmt || [];
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -609,6 +756,28 @@ var _hmt = _hmt || [];
 
     
 
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitment({
+            id: window.location.pathname, 
+            owner: 'buptljy',
+            repo: 'blog-project',
+            
+            oauth: {
+            
+            
+                client_secret: '559aec5ee68930b3582de402ad0bdb9c40fa6b4a',
+            
+                client_id: 'ba3678010728699dcb1c'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
     
 
 

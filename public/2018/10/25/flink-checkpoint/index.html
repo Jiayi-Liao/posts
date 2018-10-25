@@ -77,7 +77,7 @@ var _hmt = _hmt || [];
 
 
 
-  <meta name="keywords" content="Aerospike," />
+  <meta name="keywords" content="flink,checkpoint," />
 
 
 
@@ -88,18 +88,18 @@ var _hmt = _hmt || [];
 
 
 
-<meta name="description" content="应用场景在很多业务场景比如反欺诈、广告定向推荐、数字身份验证等，这些场景都有一些共同的特点：   读多于写     随机读    延迟低     数据量不大时，有很多优秀的框架可以使用，比如单机的redis、Cassandra等，它们不但满足上述需求而且还有着易于运维、管理方便的优点，但随着业务规模扩大，不可预测的大流量、查询延时低效都成为了比较难解决的痛点。Aerospike在2012年作为分布">
-<meta name="keywords" content="Aerospike">
+<meta name="description" content="其实这个功能需求在Flink的开发和产品迭代中非常常见，情形如下：  首次启动Flink时需要加载状态。 修改了Flink状态的相关类代码无法重新加载。 Checkpoint意外损毁无法被反序列化。  毫无疑问，这是一个生产环境必须要具备的能力，否则之后的开发和迭代都收到了很大的限制。之前也在这方面从不同的角度做了不少的探索，方法途径多样，在这里记录一下。社区的邮件讨论可以点击这里。  Conne">
+<meta name="keywords" content="flink,checkpoint">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Aerospike学习笔记">
-<meta property="og:url" content="http://www.liaojiayi.com/2018/03/20/aerospike/index.html">
+<meta property="og:title" content="如何在无Checkpoint时初始化Flink的状态？">
+<meta property="og:url" content="http://www.liaojiayi.com/2018/10/25/flink-checkpoint/index.html">
 <meta property="og:site_name" content="Developer - 廖嘉逸">
-<meta property="og:description" content="应用场景在很多业务场景比如反欺诈、广告定向推荐、数字身份验证等，这些场景都有一些共同的特点：   读多于写     随机读    延迟低     数据量不大时，有很多优秀的框架可以使用，比如单机的redis、Cassandra等，它们不但满足上述需求而且还有着易于运维、管理方便的优点，但随着业务规模扩大，不可预测的大流量、查询延时低效都成为了比较难解决的痛点。Aerospike在2012年作为分布">
+<meta property="og:description" content="其实这个功能需求在Flink的开发和产品迭代中非常常见，情形如下：  首次启动Flink时需要加载状态。 修改了Flink状态的相关类代码无法重新加载。 Checkpoint意外损毁无法被反序列化。  毫无疑问，这是一个生产环境必须要具备的能力，否则之后的开发和迭代都收到了很大的限制。之前也在这方面从不同的角度做了不少的探索，方法途径多样，在这里记录一下。社区的邮件讨论可以点击这里。  Conne">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-18T10:43:18.369Z">
+<meta property="og:updated_time" content="2018-10-25T02:43:20.323Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Aerospike学习笔记">
-<meta name="twitter:description" content="应用场景在很多业务场景比如反欺诈、广告定向推荐、数字身份验证等，这些场景都有一些共同的特点：   读多于写     随机读    延迟低     数据量不大时，有很多优秀的框架可以使用，比如单机的redis、Cassandra等，它们不但满足上述需求而且还有着易于运维、管理方便的优点，但随着业务规模扩大，不可预测的大流量、查询延时低效都成为了比较难解决的痛点。Aerospike在2012年作为分布">
+<meta name="twitter:title" content="如何在无Checkpoint时初始化Flink的状态？">
+<meta name="twitter:description" content="其实这个功能需求在Flink的开发和产品迭代中非常常见，情形如下：  首次启动Flink时需要加载状态。 修改了Flink状态的相关类代码无法重新加载。 Checkpoint意外损毁无法被反序列化。  毫无疑问，这是一个生产环境必须要具备的能力，否则之后的开发和迭代都收到了很大的限制。之前也在这方面从不同的角度做了不少的探索，方法途径多样，在这里记录一下。社区的邮件讨论可以点击这里。  Conne">
 
 
 
@@ -129,13 +129,13 @@ var _hmt = _hmt || [];
 
 
 
-  <link rel="canonical" href="http://www.liaojiayi.com/2018/03/20/aerospike/"/>
+  <link rel="canonical" href="http://www.liaojiayi.com/2018/10/25/flink-checkpoint/"/>
 
 
 
 
 
-  <title>Aerospike学习笔记 | Developer - 廖嘉逸</title>
+  <title>如何在无Checkpoint时初始化Flink的状态？ | Developer - 廖嘉逸</title>
   
 
 
@@ -262,7 +262,7 @@ var _hmt = _hmt || [];
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.liaojiayi.com/2018/03/20/aerospike/">
+    <link itemprop="mainEntityOfPage" href="http://www.liaojiayi.com/2018/10/25/flink-checkpoint/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Liao Jiayi">
@@ -279,7 +279,7 @@ var _hmt = _hmt || [];
 
         
         
-          <h2 class="post-title" itemprop="name headline">Aerospike学习笔记</h2>
+          <h2 class="post-title" itemprop="name headline">如何在无Checkpoint时初始化Flink的状态？</h2>
         
 
         <div class="post-meta">
@@ -291,8 +291,8 @@ var _hmt = _hmt || [];
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-20T01:01:00+08:00">
-                2018-03-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-25T10:42:04+08:00">
+                2018-10-25
               </time>
             
 
@@ -301,6 +301,28 @@ var _hmt = _hmt || [];
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/flink/" itemprop="url" rel="index">
+                    <span itemprop="name">flink</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -329,75 +351,42 @@ var _hmt = _hmt || [];
       
 
       
-        <h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><p>在很多业务场景比如反欺诈、广告定向推荐、数字身份验证等，这些场景都有一些共同的特点： </p>
+        <p>其实这个功能需求在Flink的开发和产品迭代中非常常见，情形如下：</p>
 <ul>
-<li>读多于写    </li>
-<li>随机读   </li>
-<li>延迟低   </li>
+<li>首次启动Flink时需要加载状态。</li>
+<li>修改了Flink状态的相关类代码无法重新加载。</li>
+<li>Checkpoint意外损毁无法被反序列化。</li>
 </ul>
-<p>数据量不大时，有很多优秀的框架可以使用，比如单机的redis、Cassandra等，它们不但满足上述需求而且还有着易于运维、管理方便的优点，但随着业务规模扩大，不可预测的大流量、查询延时低效都成为了比较难解决的痛点。<br>Aerospike在2012年作为分布式KV数据库出现后，以稳定性和延迟低的特点让不少公司开始试水，到如今4.0版本发布，6年时间里Aerospike已经积累了不少在不同行业的成功案例。</p>
+<p>毫无疑问，这是一个生产环境必须要具备的能力，否则之后的开发和迭代都收到了很大的限制。之前也在这方面从不同的角度做了不少的探索，方法途径多样，在这里记录一下。社区的邮件讨论可以点击<a href="http://mail-archives.apache.org/mod_mbox/flink-dev/201808.mbox/%3CCAMZk55au_G3F5_eREPCr59n5BbROS3W_4FN_TjVY4_PPtBK4pQ@mail.gmail.com%3E" target="_blank" rel="noopener">这里</a>。</p>
 <hr>
-<h3 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h3><p>我理解在Aerospike的Data model其实和Hbase中的namespace/table/row/column family非常类似。   </p>
-<ul>
-<li><strong>namespace</strong><ul>
-<li>namespace是最高层级的一个容器概念，决定了这个容器中的数据的存储方式，有着如下的配置    </li>
-<li>如何存储，可以选择全部存储到DRAM或者SSD上</li>
-<li>replica复制因子，决定了这个namespace的高可用性</li>
-<li>expire TTL</li>
-</ul>
-</li>
-<li><strong>sets</strong><ul>
-<li>sets是可选项，数据存储时可以指定set也可以不指定，在set中可以设置基于set的二级索引</li>
-</ul>
-</li>
-<li><strong>records</strong><ul>
-<li>record就是一行记录了，包括:<ul>
-<li>key</li>
-<li>metadata(版本号(version), ttl, last-update-time(lut))</li>
-<li>bins</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>bins</strong><ul>
-<li>包括name和value（类似列名和值）</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h3 id="查询索引"><a href="#查询索引" class="headerlink" title="查询索引"></a>查询索引</h3><p>Aerospike中的查询索引分为两种，一级索引和二级索引，两种索引的用途各不相同。</p>
-<ul>
-<li><strong>一级索引（Primary-Index）</strong><ul>
-<li>Primary-Index是Aerospike默认存在的，作用是加速查询和防止数据倾斜，<a href="https://www.aerospike.com/docs/architecture/primary-index.html" target="_blank" rel="noopener">具体原理</a>是取每一个key做hash后，前12bit作为partitionID，所以partition的个数是固定的，4096个。</li>
-</ul>
-</li>
-<li><strong>二级索引（Secondary-Index）</strong><ul>
-<li>Secondary-Index和关系型数据库中的索引类似，基于bin而存在，但其索引后的值是当前节点的partitionId列表，也就是说，即使命中了二级索引，还是要scan相应partition list中的每一行记录，效率并不高。需要注意的是，在生成Secondary-Index的过程，Aerospike需要扫描所有的数据，所以要在low load的时候做这样的操作。</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h3 id="一致性和高可用分析"><a href="#一致性和高可用分析" class="headerlink" title="一致性和高可用分析"></a>一致性和高可用分析</h3><p>我们假设在单namespace的情况下，当前Aerospike集群为4个节点，每个节点有1024个partition，replica复制因子为1，探讨常见的以下<a href="https://www.aerospike.com/docs/architecture/consistency.html" target="_blank" rel="noopener">几种场景</a>：</p>
+<h4 id="ConnectedStream"><a href="#ConnectedStream" class="headerlink" title="ConnectedStream"></a>ConnectedStream</h4><p>利用ConnectedStream是一个不需要二次开发并且很取巧的方法。</p>
+<figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line"><span class="symbol">val</span> recoverStream = env.<span class="keyword">addSource(sourceA)</span></span><br><span class="line"><span class="keyword">val </span>dataStream = env.<span class="keyword">addSource(sourceB)</span></span><br><span class="line"><span class="keyword">recoverStream.connect(dataStream)</span></span><br></pre></td></tr></table></figure>
+<p>这里将恢复的数据流和正常数据流connect，意味着后续的聚合操作需要同时对聚合数据和明细数据做分别处理，例如：</p>
+<figure class="highlight cs"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">override</span> def <span class="title">add</span>(<span class="params"><span class="keyword">value</span>: IN, accumulator: ACC</span>): MetricAccumulator </span>= &#123;</span><br><span class="line">    <span class="keyword">value</span> match &#123;</span><br><span class="line">        <span class="function"><span class="keyword">case</span> <span class="title">AGG</span>(<span class="params">x</span>) </span>=&gt; accumulator.merege(<span class="keyword">value</span>)</span><br><span class="line">        <span class="function"><span class="keyword">case</span> <span class="title">RECORD</span>(<span class="params">x</span>) </span>=&gt; accumulator.<span class="keyword">add</span>(<span class="keyword">value</span>)</span><br><span class="line">        <span class="keyword">case</span> _ =&gt; accumulator</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这种方法直接使用了Flink的ConnectedStream来实现两种数据的合并，简单易实现但是不够优雅:)，是一个可行的方式同时又会带来以下影响。</p>
 <ol>
-<li>在一个节点宕机的情况下，其replica的节点从replica变成了master，并开始寻找新的replica节点，数据不会发生丢失。</li>
-<li>在两个节点宕机的情况下，如果两个节点正好是partition的replica和master，数据丢失，可靠性无法保证。</li>
-<li>在一个节点宕机后重启时，由于在内存中的index丢失，需要重新scan整个SSD来重建索引（非常耗时），整个集群开始重新rebalance，相应partition的数据从其他节点复制到新节点中，直到新节点ready之后再加入集群，数据不会丢失。</li>
+<li>增加了一条数据流，增加了相应parallelism数量的Task，并且这个数据流在状态恢复以后并没有任何作用。</li>
+<li>在后续ETL中需要对数据类型做出判断，分别处理，ETL链路过长的话略有繁琐。</li>
 </ol>
 <hr>
-<h3 id="选型建议"><a href="#选型建议" class="headerlink" title="选型建议"></a>选型建议</h3><p>KV数据库有很多，但大多数都是在Speed和Scale上来做取舍，根据别人的一些选型经验，总结出了其他几个存储和Aerospike对比的一些劣势。</p>
-<ul>
-<li>MongoDB、Redis这种需要内存的代价过高，无法做到低成本地快速Scale，且无法应对高峰流量。</li>
-<li>Couchbase性能很好，但是不支持udf。</li>
-<li>Cassandra在大数据量下无法保证低延迟。</li>
-</ul>
+<h4 id="Bravo"><a href="#Bravo" class="headerlink" title="Bravo"></a>Bravo</h4><p><a href="https://github.com/king/bravo" target="_blank" rel="noopener">Bravo</a>是一个和Flink State有关的开源项目。</p>
+<blockquote>
+<p>Bravo is a convenient state reader and writer library leveraging the Flink’s batch processing capabilities. It supports processing and writing Flink streaming snapshots. At the moment it only supports processing RocksDB snapshots but this can be extended in the future for other state backends.</p>
+</blockquote>
+<p>它可以对Flink的savepoint目录进行read&amp;write，目前只支持RocksDB。基本原理是基于Flink中RocksDBStateBackend的restore/snapshot的方法的序列化以及反序列化逻辑，提取出了一些基于KeyedState/OperatorState的方法。  </p>
+<p>这个项目不好的地方在于它独立于Flink而存在，所以需要重写很多Flink内部对savepoint的处理和读取的逻辑。我曾经尝试过在<a href="https://github.com/king/bravo" target="_blank" rel="noopener">bravo</a>中加入FsStateBackend的Reader/Writer，但是因为Flink在FsStateBackend的代码结构涉及到的类过多，逻辑也略复杂，导致在完成Reader之后不得不放弃。  </p>
+<p>不过基于RocksDB的Backend还是可以使用它来操作savepoint的。</p>
 <hr>
-<h3 id="不足之处"><a href="#不足之处" class="headerlink" title="不足之处"></a>不足之处</h3><p>虽然Aerospike有稳定性好、延迟低、性价比高的特点，但是也有一些不足的地方需要注意的：</p>
-<ul>
-<li>Aerospike Rolling Start时间过长（scan整个SSD重建索引）</li>
-<li>无法支持复杂的数据类型，例如hyperloglog</li>
-<li>每个record不能超过1MB</li>
-<li>在做rebalance过程中，响应会有所抖动</li>
-</ul>
+<h4 id="Queryable-State"><a href="#Queryable-State" class="headerlink" title="Queryable State"></a>Queryable State</h4><p>从Flink 1.6开始引入了<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.6/dev/stream/state/queryable_state.html" target="_blank" rel="noopener">Queryable State</a>这个概念。通过stateDescriptor.setQueryable(String queryableStateName)来让State可查，原理如下：</p>
+<ol>
+<li>在TaskManager中如果检测到可查询的State，会启动一个KvStateServer。</li>
+<li>使用<a href="https://ci.apache.org/projects/flink/flink-docs-release-1.6/dev/stream/state/queryable_state.html" target="_blank" rel="noopener">说明文档</a>中的示例代码对State进行查询，依次通过ClientProxy,ServerProxy,Server，检验有效性成功之后，使用StateTable中的get(K key, N namespace)获得State的值并返回。</li>
+</ol>
+<p>了解这个原理之后，其实写一个对应的Writable State的接口就非常简单了，在KvStateServer加入接口，调用StateTable中的写方法即可完成。需要改动以下文件：<br>注意这里对StateTable的操作必须要加锁。  </p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">QueryableStateClient.java</span><br><span class="line">KvStateRequest.java</span><br><span class="line">KvStateClientProxyHandler.java</span><br><span class="line">KvStateInternalRequest.java</span><br><span class="line">KvStateServerHandler.java</span><br><span class="line">StateTable.java</span><br></pre></td></tr></table></figure>
+<p>这样做的好处是相对灵活，日后如果有类似的需求可以通过调整接口实现。同时，这也破坏了Flink的容错性，因为在写入State时，若在下一个checkpoint完成前出现失败情况，Flink是无法恢复这个State的。</p>
+<hr>
+<p>最优雅最正确的方式应该是使用外部构建savepoint的方式，既没有破坏现有程序中State的完整性，也没有加入不必要的代码。Flink社区目前也在朝这个方向努力，只是由于不同StateBackend序列化的格式与逻辑大相径庭，导致要兼容所有的StateBackend显得略有困难。</p>
 
       
     </div>
@@ -415,7 +404,9 @@ var _hmt = _hmt || [];
       
         <div class="post-tags">
           
-            <a href="/tags/Aerospike/" rel="tag"># Aerospike</a>
+            <a href="/tags/flink/" rel="tag"># flink</a>
+          
+            <a href="/tags/checkpoint/" rel="tag"># checkpoint</a>
           
         </div>
       
@@ -428,15 +419,15 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/10/11/MapFailed/" rel="next" title="java.lang.OutOfMemoryError: Map failed">
+                <i class="fa fa-chevron-left"></i> java.lang.OutOfMemoryError: Map failed
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/20/flink-exactly-once/" rel="prev" title="Flink的Exactly-Once">
-                Flink的Exactly-Once <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -595,7 +586,7 @@ var _hmt = _hmt || [];
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用场景"><span class="nav-number">1.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据模型"><span class="nav-number">2.</span> <span class="nav-text">数据模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询索引"><span class="nav-number">3.</span> <span class="nav-text">查询索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一致性和高可用分析"><span class="nav-number">4.</span> <span class="nav-text">一致性和高可用分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选型建议"><span class="nav-number">5.</span> <span class="nav-text">选型建议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不足之处"><span class="nav-number">6.</span> <span class="nav-text">不足之处</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#ConnectedStream"><span class="nav-number">1.</span> <span class="nav-text">ConnectedStream</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Bravo"><span class="nav-number">2.</span> <span class="nav-text">Bravo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Queryable-State"><span class="nav-number">3.</span> <span class="nav-text">Queryable State</span></a></li></ol></div>
             
 
           </div>

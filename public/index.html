@@ -261,6 +261,309 @@ var _hmt = _hmt || [];
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.liaojiayi.com/2018/10/25/flink-checkpoint/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liao Jiayi">
+      <meta itemprop="description" content="Carpe Diem.">
+      <meta itemprop="image" content="/assets/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Developer - 廖嘉逸">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/25/flink-checkpoint/" itemprop="url">如何在无Checkpoint时初始化Flink的状态？</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-25T10:42:04+08:00">
+                2018-10-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/flink/" itemprop="url" rel="index">
+                    <span itemprop="name">flink</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>其实这个功能需求在Flink的开发和产品迭代中非常常见，情形如下：</p>
+<ul>
+<li>首次启动Flink时需要加载状态。</li>
+<li>修改了Flink状态的相关类代码无法重新加载。</li>
+<li>Checkpoint意外损毁无法被反序列化。</li>
+</ul>
+<p>毫无疑问，这是一个生产环境必须要具备的能力，否则之后的开发和迭代都收到了很大的限制。之前也在这方面从不同的角度做了不少的探索，方法途径多样，在这里记录一下。社区的邮件讨论可以点击<a href="http://mail-archives.apache.org/mod_mbox/flink-dev/201808.mbox/%3CCAMZk55au_G3F5_eREPCr59n5BbROS3W_4FN_TjVY4_PPtBK4pQ@mail.gmail.com%3E" target="_blank" rel="noopener">这里</a>。</p>
+<hr>
+<h4 id="ConnectedStream"><a href="#ConnectedStream" class="headerlink" title="ConnectedStream"></a>ConnectedStream</h4>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/25/flink-checkpoint/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.liaojiayi.com/2018/10/11/MapFailed/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liao Jiayi">
+      <meta itemprop="description" content="Carpe Diem.">
+      <meta itemprop="image" content="/assets/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Developer - 廖嘉逸">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/11/MapFailed/" itemprop="url">java.lang.OutOfMemoryError: Map failed</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-11T09:19:07+08:00">
+                2018-10-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jvm/" itemprop="url" rel="index">
+                    <span itemprop="name">jvm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>最近遇到这个Exception，发现不少开源框架在实现快速读写文件时，采用的都是FileChannel的map方法，示例如下：<br><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">at</span> <span class="selector-tag">sun</span><span class="selector-class">.nio</span><span class="selector-class">.ch</span><span class="selector-class">.FileChannelImpl</span><span class="selector-class">.map0</span>(<span class="selector-tag">Native</span> <span class="selector-tag">Method</span>) ~<span class="selector-attr">[?:1.8.0_40]</span></span><br><span class="line"><span class="selector-tag">at</span> <span class="selector-tag">sun</span><span class="selector-class">.nio</span><span class="selector-class">.ch</span><span class="selector-class">.FileChannelImpl</span><span class="selector-class">.map</span>(<span class="selector-tag">FileChannelImpl</span><span class="selector-class">.java</span><span class="selector-pseudo">:904)</span> ~<span class="selector-attr">[?:1.8.0_40]</span></span><br></pre></td></tr></table></figure></p>
+<p>这个方法的作用是将文件映射到堆外内存中，然后通过读写内存来实现对文件的快速读写。从<a href="https://zhuanlan.zhihu.com/p/27698585" target="_blank" rel="noopener">知乎</a>摘了一张图。<br><img src="http://www.liaojiayi.com/assets/mmap1.jpg" alt="mmap display"></p>
+<hr>
+<h4 id="问题-amp-解决"><a href="#问题-amp-解决" class="headerlink" title="问题 &amp; 解决"></a>问题 &amp; 解决</h4><p>目前来看，我在使用MapDB和Phoenix时都曾经出现过这个Exception，MapDB直接将DB文件映射到堆外内存，来达到高效的读写；Phoenix在结果集过大时，需要落地成临时文件，而这个临时文件是采用mmap来操作的。  </p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/11/MapFailed/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.liaojiayi.com/2018/08/25/oracle-cep/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1201,6 +1504,28 @@ var _hmt = _hmt || [];
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/flink/" itemprop="url" rel="index">
+                    <span itemprop="name">flink</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -1454,7 +1779,7 @@ var _hmt = _hmt || [];
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1465,7 +1790,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -1476,7 +1801,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
